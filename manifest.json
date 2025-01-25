@@ -1,0 +1,30 @@
+{
+    "name": "Resume Racoon",
+    "short_name": "Resume Racoon",
+    "version": "1.0.0.0",
+    "description": "Resume Racoon",
+    "icons": {
+        "16": "icons/16x16.png",
+        "48": "icons/48x48.png",
+        "128": "icons/128X128.png"
+    },
+    "manifest_version": 3,
+    "permissions": ["storage", "scripting", "activeTab"],
+    "host_permissions": ["<all_urls>"],
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Resume Racoon"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["background.jpg", "images/background.jpg", "api.txt"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": ["*myworkdayjobs.com*"],
+            "js": ["pinterest.js"]
+        }
+    ]
+  }
