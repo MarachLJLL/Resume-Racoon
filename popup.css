@@ -1,9 +1,5 @@
 body{
-    background-color: #e1ceb6;
-    display: grid;
-    place-items: center;
-    margin: 0;         
-    height: 100vh;
+    background-color: #EDE3DB;      
     font-family: "Albert Sans", serif;
     font-optical-sizing: auto;
     font-weight: 400;
@@ -11,29 +7,94 @@ body{
     color: #4E4138;     
 }
 
-#outerContainer{
+header{
     display: flex;
-    background-color: #d4b895;
-    width: 100px;
-    height: 500px;
-    width: 90%;            
-    max-width: 400px;
-    height: 90%;
-    max-height: 600px;
-    border-radius: 10px;
     align-items: center;
-    flex-direction: column ;
-    overflow: auto;
-    gap: 20px;
-    padding-top: 20px;
+    padding: 10px 20px;
+    justify-content: center;
 }
 
 #titleContainer{
-    width: 60%;
-    height: 30px;
-    text-align: center;
-    background-color: red;
-    padding: 0;
-    font-size: 25px;
+    font-size: 40px;
     font-weight: bold;
+    padding-left: 10px;
+}
+
+.logo{
+    height: 90px;
+    width: auto;
+}
+
+.accordion {
+    background-color: #DDD0BC;
+    cursor: pointer;
+    padding: 18px;
+    font-size: 25px;
+    width: calc(100% - 20px);
+    text-align: left;
+    border: none;
+    outline: none;
+    font-family: "Albert Sans", serif;
+    font-weight: bold;
+    color: #4E4138;
+    border-radius: 10px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+.active, .accordion:hover {
+    background-color: #e9d4b6;
+}
+  
+.accordion.active {
+    border-radius: 10px 10px 0 0;
+}
+
+.accordion svg {
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+}
+
+.informationOptions {
+    padding: 0 18px;
+    background-color:#e9d4b6;
+    border-radius: 0 0 10px 10px;
+    display: none;
+    overflow: hidden;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.accordionMini{
+    background-color: #e9d4b6;
+    cursor: pointer;
+    padding: 18px;
+    font-size: 20px;
+    width: calc(100% - 20px);
+    text-align: left;
+    border: none;
+    outline: none;
+    font-family: "Albert Sans", serif;
+    font-weight: bold;
+    color: #4E4138;
+    border-radius: 10px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.accordionMini svg{
+    width: 40px;
+    height: 40px;
+    padding: 0px;
+}
+
+.active, .accordionMini:hover {
+    background-color: #e9d4b6;
+}
+  
+.accordionMini.active {
+    border-radius: 10px 10px 0 0;
 }
