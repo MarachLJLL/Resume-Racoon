@@ -3,7 +3,7 @@ class WorkExperience {
         this.jobTitle;
         this.company;
         this.location;
-        this.startDate;
+        this.startDate; // MM/DD/YYYY
         this.endDate;
         this.roleDescription;
     }
