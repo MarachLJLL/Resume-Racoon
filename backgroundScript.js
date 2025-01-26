@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
    ************************************************/
   const gatherInfoBtn = document.getElementById('gatherInfoBtn');
   if (gatherInfoBtn) {
-    gatherInfoBtn.addEventListener('click', gatherInformation);
+    gatherInfoBtn.addEventListener('click', smartSetup);
   }
 
   /************************************************
@@ -229,10 +229,41 @@ function handleLinkedInEnter(event) {
 * File Upload / Resume
 ************************************************/
 function handleFileUpload() {
+  console.log('detected');
   const fileInput      = document.getElementById('fileUpload');
   const fileName       = document.getElementById('fileName');
   const removeResumeBtn= document.getElementById('removeResumeBtn');
-  if (!fileInput || !fileName || !removeResumeBtn) return;
+  const pdfFile = fileInput.files[0];
+  console.log(pdfFile.type);
+  if (pdfFile.type !== 'application/pdf'){
+    console.log("not pdf file");
+    return
+  }
+  // Create a FileReader to read the file
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    console.log(dataUrl);
+    const base64StartIndex = dataUrl.indexOf(',') + 1;
+    const base64String = dataUrl.substring(base64StartIndex);
+
+      // Display the Base64 string
+    pdfName = fileName.textContent;
+    console.log(base64String);
+    const options = {
+      method: 'POST',
+      headers: {Authorization: `Bearer ${GUMLOOP_API_KEY}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify({"file_name":pdfName,"file_content":base64String,"user_id":"JKN6WFfBqzVwBCNqMCQEkKDy6EA3"})
+    };
+    
+    fetch('https://api.gumloop.com/api/v1/upload_file', options)
+      .then(response => response.json())
+      .then(data => {
+        console.log('fileupload response: ', data);
+        })
+      .catch(err => console.error(err));
+  };
+  reader.readAsDataURL(pdfFile);
 
   if (fileInput.files.length > 0) {
       fileName.textContent = fileInput.files[0].name;
@@ -259,9 +290,6 @@ function removeResume() {
 /************************************************
 * "Gather Info" Button
 ************************************************/
-function gatherInformation() {
-  alert("Gathering information from LinkedIn and Resume!");
-}
 
 function updateGatherInfoButton() {
   const linkedinInput = document.getElementById("linkedinProfile")?.value.trim();

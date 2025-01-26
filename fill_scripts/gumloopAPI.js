@@ -3,41 +3,28 @@ var runSmartSetupID = "";
 var runGoogleSheetID = "";
 const GUMLOOP_API_KEY = '3ae93dfe4aff421787d1f0f8e0464a91';
 
-function uploadResume(){
-    const options = {
-        method: 'POST',
-        headers: {Authorization: 'Bearer <token>', 'Content-Type': 'application/json'},
-        body: '{"file_name":"<string>","file_content":"aSDinaTvuI8gbWludGxpZnk=","user_id":"JKN6WFfBqzVwBCNqMCQEkKDy6EA3","project_id":"<string>"}'
-      };
-      
-      fetch('https://api.gumloop.com/api/v1/upload_file', options)
-        .then(response => response.json())
-        .then(response => console.log(response))
-        .catch(err => console.error(err));
-}
-
 
 function smartSetup() {
+  console.log("running smartsetup");
+    const fileName = document.getElementById('fileName').textContent;
     const options = {
-        method: 'POST',
-        headers: {
-          'Authorization': 'Bearer 3ae93dfe4aff421787d1f0f8e0464a91',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
-          "saved_item_id": "fmfG6aP8giERQurqp2gtkg",
-          "pipeline_inputs": []
-        })
-      };
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer 3ae93dfe4aff421787d1f0f8e0464a91',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
+        "saved_item_id": "fmfG6aP8giERQurqp2gtkg",
+        "pipeline_inputs": JSON.stringify({"input_name":"resumeName","value":fileName})
+      })
+    };
       
       fetch('https://api.gumloop.com/api/v1/start_pipeline', options)
         .then(response => response.json())
         .then(data => {
             console.log('smart setup Response:', data);
-            runSmartSetupID = data.run_id;
-            console.log(runSmartSetupID)
-            getResponse(runSmartSetupID);
+            getResponse(data.run_id);
             })
         .catch(err => console.error(err));
 }
