@@ -186,3 +186,194 @@ setTimeout(() => {
 }, 5000);
 
 console.log('loaded add jobs')
+
+/***********************************************
+ * EDUCATION LOGIC
+ ***********************************************/
+function simulateEnterKeyPress(element) {
+  const enterEvent = new KeyboardEvent('keydown', {
+    key: 'Enter',
+    code: 'Enter',
+    keyCode: 13, // keyCode for Enter
+    which: 13,    // 'which' is also 13 for Enter
+    bubbles: true, // Ensures the event bubbles up
+    cancelable: true
+  });
+
+  element.dispatchEvent(enterEvent);
+}
+
+let eduFirstMatch = null;
+let eduClickCount = 0;
+
+function startEducationFlow() {
+console.log("Starting Education flow...");
+getEducationButtons();
+clickEducationWithDelay();
+}
+
+// 1) Find the "Add Education" button
+function getEducationButtons() {
+const buttons = document.querySelectorAll('[aria-label]');
+eduFirstMatch = Array.from(buttons).find((button) => {
+  const ariaLabel = (button.getAttribute('aria-label') || "").toLowerCase();
+  return ariaLabel.includes('add') && ariaLabel.includes('education');
+});
+
+if (eduFirstMatch) {
+  console.log("Found matching Education button:", eduFirstMatch.getAttribute('aria-label'));
+} else {
+  console.log("No matching Education button found.");
+}
+}
+
+// 2) Click up to 5 times, fill each new entry
+function clickEducationWithDelay() {
+if (eduClickCount < 1 && eduFirstMatch !== null) {
+  eduFirstMatch.click();
+  eduClickCount++;
+  console.log(`(Edu) Clicked button #${eduClickCount}`);
+
+  setTimeout(() => {
+    fillFirstEducation();
+    setTimeout(clickEducationWithDelay, 1000);
+  }, 1000);
+
+} else {
+  console.log("Finished Education or no Education button found.");
+}
+}
+function simulateTypingAndEnter(element, text) {
+  if (!element) {
+    console.error("Element not found.");
+    return;
+  }
+
+  // Simulate typing each character
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const keydownEvent = new KeyboardEvent('keydown', { key: char, code: `Key${char.toUpperCase()}`, bubbles: true });
+    const keypressEvent = new KeyboardEvent('keypress', { key: char, code: `Key${char.toUpperCase()}`, bubbles: true });
+    const inputEvent = new InputEvent('input', { inputType: 'insertText', data: char, bubbles: true });
+
+    // Dispatch keydown, keypress, and input events for each character
+    element.dispatchEvent(keydownEvent);
+    element.value += char; // Update the value
+    element.dispatchEvent(keypressEvent);
+    element.dispatchEvent(inputEvent);
+  }
+
+  // Dispatch 'change' event to signal input completion
+  const changeEvent = new Event('change', { bubbles: true });
+  element.dispatchEvent(changeEvent);
+
+  // Simulate pressing the Enter key
+  const enterKeydownEvent = new KeyboardEvent('keydown', { key: 'Enter', code: 'Enter', keyCode: 13, bubbles: true });
+  const enterKeyupEvent = new KeyboardEvent('keyup', { key: 'Enter', code: 'Enter', keyCode: 13, bubbles: true });
+
+  element.dispatchEvent(enterKeydownEvent);
+  element.dispatchEvent(enterKeyupEvent);
+  element.dispatchEvent(enterKeydownEvent);
+  element.dispatchEvent(enterKeyupEvent);
+}
+async function fillDegree() {
+  let countryButton = document.querySelectorAll('[data-automation-id="degree"]')[0];
+  if (countryButton) {
+      countryButton.click()
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      let dropDown = document.querySelectorAll('[tabindex="-1"]');
+      dropDown = dropDown[dropDown.length - 1];
+      console.log('dd', dropDown);
+      let countryDivs = dropDown.getElementsByTagName('div')
+      return countryDivs;
+  } else {
+      console.log('Country not found on this workday page')
+  }
+}
+
+// Example Usage:
+// Select the input element
+
+
+
+// 3) Fill newly created Education row
+function fillFirstEducation() {
+const schoolDivs = document.querySelectorAll('input[data-automation-id="searchBox"]');
+const studyDiv = document.querySelector('div[data-automation-id="formField-field-of-study"]');
+const studyIn = studyDiv.getElementsByTagName('input')[0];
+const gpaDiv = document.querySelector('div[data-automation-id="formField-gpa"]');
+const gpaIn = gpaDiv.getElementsByTagName('input')[0];
+if (schoolDivs.length > 0 && 0 < schoolDivs.length) {
+  const firstSchool = schoolDivs[0];
+  firstSchool.click();
+  simulateTypingAndEnter(firstSchool, "Mcgill");
+  setTimeout(() => {
+      (async () => {
+          cl = await fillDegree();
+          if (cl) {
+              // Convert to an array so .forEach() works reliably:
+              Array.from(cl).forEach(countryDiv => {
+                  if (countryDiv.textContent === 'Bachelor Degree') {
+                      countryDiv.parentElement.click();
+                  }
+              });
+          }
+      })()
+  }, 3000);
+  setTimeout(()=>{
+      studyIn.click();
+      simulateTypingAndEnter(studyIn, "computer science");
+      setTimeout(()=>{
+          simulateTypingAndEnter(studyIn, "");
+          console.log("enter");
+      },5000)
+  }, 5000);
+  simulateTypingAndEnter(studyIn, "");
+  gpaIn.value = "4.0";
+
+  console.log(`Filled education row #${0}`);
+} else {
+  console.log("No school input or index out of range for Education.");
+}
+}
+
+/***********************************************
+* HELPER: Dispatch multiple events for an element
+***********************************************/
+function dispatchInputEvents(element) {
+element.dispatchEvent(new Event('input',  { bubbles: true }));
+element.dispatchEvent(new Event('keyup',  { bubbles: true }));
+element.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
+/***********************************************
+* HELPER: Format date => "MM/DD/YYYY"
+***********************************************/
+function formatDate(dateObj) {
+const mm = String(dateObj.getMonth() + 1).padStart(2, '0');
+const dd = String(dateObj.getDate()).padStart(2, '0');
+const yyyy = dateObj.getFullYear();
+return `${mm}/${dd}/${yyyy}`;
+}
+
+/***********************************************
+*  WAIT FOR NEXT BUTTON => START WORK FLOW
+***********************************************/
+setTimeout(() => {
+let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]');
+if (!nextButton) {
+  console.log("Next button not found for Work. Aborting.");
+  return;
+}
+
+nextButton.addEventListener('click', () => {
+  console.log("Next button (Work) clicked. Will run getButtons/click after 5s...");
+  setTimeout(() => {
+    // Start the entire Work flow
+    startWorkFlow();
+  }, 5000);
+});
+console.log("Next button listener added for Work.");
+}, 5000);
+
+console.log("Loaded combined script: Work => Education.");
