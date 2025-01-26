@@ -82,11 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * 2. LinkedIn, File Upload, Remove Resume
    ************************************************/
-  const linkedinProfile = document.getElementById('linkedinProfile');
-  if (linkedinProfile) {
-    // Replaces onkeypress="handleLinkedInEnter(event)"
-    linkedinProfile.addEventListener('keypress', handleLinkedInEnter);
-  }
 
   const fileUpload = document.getElementById('fileUpload');
   if (fileUpload) {
@@ -101,10 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * 3. "Gather Info" button
    ************************************************/
-  const gatherInfoBtn = document.getElementById('gatherInfoBtn');
-  if (gatherInfoBtn) {
-    gatherInfoBtn.addEventListener('click', smartSetup);
-  }
+  function updateGatherInfoButton() {
+      const gatherInfoBtn = document.getElementById("gatherInfoBtn");
+      if (!gatherInfoBtn) return;
+    
+      // Always enable the button
+      gatherInfoBtn.disabled = false;
+      gatherInfoBtn.style.opacity = "1";
+      gatherInfoBtn.style.cursor = "pointer";
+    }
+    
+    // Remove references to LinkedIn logic in event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileUpload = document.getElementById('fileUpload');
+      if (fileUpload) {
+        fileUpload.addEventListener('change', handleFileUpload);
+      }
+    
+      const removeResumeBtn = document.getElementById('removeResumeBtn');
+      if (removeResumeBtn) {
+        removeResumeBtn.addEventListener('click', removeResume);
+      }
+    
+      const gatherInfoBtn = document.getElementById('gatherInfoBtn');
+      if (gatherInfoBtn) {
+        gatherInfoBtn.addEventListener('click', smartSetup);
+      }
+    
+      // Initial state updates
+      updateGatherInfoButton();
+  });
 
   /************************************************
    * 4. "Add Education", "Add Experience"
