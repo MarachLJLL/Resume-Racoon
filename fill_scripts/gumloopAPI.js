@@ -1,9 +1,40 @@
 var runCoverLetterID = "";
 var runSmartSetupID = "";
+var runGoogleSheetID = "";
 const GUMLOOP_API_KEY = '3ae93dfe4aff421787d1f0f8e0464a91';
 
 
 function smartSetup() {
+  console.log("running smartsetup");
+    const fileName = document.getElementById('fileName').textContent;
+    const options = {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer 3ae93dfe4aff421787d1f0f8e0464a91',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
+        "saved_item_id": "fmfG6aP8giERQurqp2gtkg",
+        "pipeline_inputs": JSON.stringify({"input_name":"resumeName","value":fileName})
+      })
+    };
+      
+      fetch('https://api.gumloop.com/api/v1/start_pipeline', options)
+        .then(response => response.json())
+        .then(data => {
+            console.log('smart setup Response:', data);
+            getResponse(data.run_id);
+            })
+        .catch(err => console.error(err));
+}
+
+function addToSheets() {
+    const googleSheetLink = document.getElementById("googleSheetLink")?.value.trim();
+    const jobInput = document.getElementById("jobProfile")?.value.trim();
+    const linkedin = document.getElementById("linkedinProfile")?.value.trim();
+    // alert(`Generating coversheet using the Google Sheet link: ${googleSheetLink} and ${jobInput} and ${linkedin}`);
+
     const options = {
         method: 'POST',
         headers: {
@@ -12,43 +43,19 @@ function smartSetup() {
         },
         body: JSON.stringify({
           "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
-          "saved_item_id": "fmfG6aP8giERQurqp2gtkg",
-          "pipeline_inputs": []
+          "saved_item_id": "aFwE7UFbwv1fSbHreoDszM",
+          "pipeline_inputs": [{"input_name":"linkedinURL","value":linkedin},
+            {"input_name":"googlesheetlink","value":googleSheetLink},
+            {"input_name":"jobdescriptionurl","value":jobInput}]
         })
       };
-      
-      fetch('https://api.gumloop.com/api/v1/start_pipeline', options)
-        .then(response => response.json())
-        .then(data => {
-            console.log('smart setup Response:', data);
-            runSmartSetupID = data.run_id;
-            console.log(runSmartSetupID)
-            getResponse(runSmartSetupID);
-            })
-        .catch(err => console.error(err));
-}
-
-function addToSheets() {
-  const options = {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${GUMLOOP_API_KEY}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
-      "saved_item_id": "cx7A71FhpAvVy4iufG7aUm",
-      "pipeline_inputs": [
-        {"input_name":"LinkedInURL","value":"https://www.linkedin.com/in/jason-shao-751686189/"},
-        {"input_name":"JobpostingURL","value":"https://jobs.lever.co/wealthsimple/7feb253c-ca15-40d9-b6cd-fc430138e240"}
-      ]
-    })
-  };
 
   fetch('https://api.gumloop.com/api/v1/start_pipeline', options)
     .then(response => response.json())  // parse response as JSON
     .then(data => {
       console.log('API Response:', data);
+      runGoogleSheetID = data.run_id;
+      getResponse(runGoogleSheetID);
     })
     .catch(err => {
       console.error('API Error:', err);
@@ -92,46 +99,73 @@ function getResponse(runid) {
   }
 
 function generateCoverLetter() {
+    const jobInput = document.getElementById("jobProfile")?.value.trim();
+    const linkedin = document.getElementById("linkedinProfile")?.value.trim();
+    
     const options = {
         method: 'POST',
         headers: {
-        'Authorization': `Bearer ${GUMLOOP_API_KEY}`,
-        'Content-Type': 'application/json'
+          'Authorization': 'Bearer 3ae93dfe4aff421787d1f0f8e0464a91',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-        "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
-        "saved_item_id": "8WBD2zQ5YtHCN9JtkxmFMZ",
-        "pipeline_inputs": [{"input_name":"LinkedInURL","value":"https://www.linkedin.com/in/jason-shao-751686189/"},{"input_name":"JobPostingURL","value":"https://jobs.lever.co/wealthsimple/7feb253c-ca15-40d9-b6cd-fc430138e240"}]
+          "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
+          "saved_item_id": "8WBD2zQ5YtHCN9JtkxmFMZ",
+          "pipeline_inputs": [{"input_name":"LinkedInURL","value":linkedin},{"input_name":"jobdescriptionurl","value":jobInput}]
         })
-    };
+     };
 
     fetch('https://api.gumloop.com/api/v1/start_pipeline', options)
         .then(response => response.json())  // parse response as JSON
         .then(data => {
-        console.log('generateCoverLetter Response:', data);
-        runCoverLetterID = data.run_id;
-        getResponse(runCoverLetterID);
+            console.log('generateCoverLetter Response:', data);
+            runCoverLetterID = data.run_id;
+
+            const options = {
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${GUMLOOP_API_KEY}`
+                }
+              };
+              const intervalId = setInterval(() => {
+                fetch(`https://api.gumloop.com/api/v1/get_pl_run?run_id=${runCoverLetterID}&user_id=JKN6WFfBqzVwBCNqMCQEkKDy6EA3`, options)
+                  .then((response) => response.json())
+                  .then((data) => {
+                    console.log('Polling response:', data);
+                    const comment = document.getElementById("generateCoversheetComment");
+                    comment.textContent = "processing..."
+                    if (data.state === 'DONE') {
+                        console.log("done");
+                      // Place the response in the textbox
+                        const docxUrl = data.outputs.coverletter;
+                        const link = document.createElement('a');
+                        comment.textContent = "DONE"
+                        link.href = docxUrl;
+                        link.download = 'coverletter.docx'; // The name to give the downloaded file
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                        // comment.textContent = "download";
+
+                        clearInterval(intervalId);
+
+                        // comment.click();
+                    }
+                  })
+                  .catch((err) => {
+                    console.error('Error in getResponse:', err);
+                  });
+              }, 5000); // 5000 ms = 5 seconds
         })
         .catch(err => {
         console.error('generateCoverLetter Error:', err);
         });
 }
 
-// Listen for button click
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('generateButton')
-    .addEventListener('click', generateCoverLetter);
-});
 // Listen for a button click
-document.addEventListener('DOMContentLoaded', () => {
-  const triggerButton = document.getElementById('triggerButton');
-  const responseButton = document.getElementById('getResponseButton');
-  document.getElementById('generateButton').addEventListener('click', generateCoverLetter);
-  document.getElementById('smartSetup').addEventListener('click', smartSetup)
-  if (triggerButton) {
-    triggerButton.addEventListener('click', addToSheets);
-  }
-  if (responseButton) {
-    responseButton.addEventListener('click', getResponse);
-  }
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   const triggerButton = document.getElementById('triggerButton');
+//   const responseButton = document.getElementById('getResponseButton');
+//   document.getElementById('generateButton').addEventListener('click', generateCoverLetter);
+//   document.getElementById('smartSetup').addEventListener('click', smartSetup);
+// });

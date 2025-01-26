@@ -7,7 +7,7 @@
 
     },
     "manifest_version": 3,
-    "permissions": ["storage", "scripting", "activeTab"],
+    "permissions": ["storage", "scripting", "activeTab", "downloads"],
     "host_permissions": ["<all_urls>"],
     "action": {
         "default_popup": "index.html",
@@ -34,12 +34,16 @@
             "matches": ["*://*.wd3.myworkdayjobs.com/*"],
             "js": [
                 "fill_scripts/AddJobs.js",
-                "fill_scripts/Workday.js"  
+                "fill_scripts/Workday.js",
+                "fill_scripts/WDTI.js"
             ],
             "all_frames": true
         },
         {
             "matches": ["<all_urls>"],
+            "exclude_matches": [
+                "*://*.wd3.myworkdayjobs.com/*"
+              ],
             "js": [
                 "fill_scripts/TextInput.js"  
             ],
