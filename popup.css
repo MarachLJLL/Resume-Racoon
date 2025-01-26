@@ -145,6 +145,7 @@ header{
     align-items: center;
     margin-bottom: 20px;
     margin-left: 10px;
+    margin-right: 10px;
 }
   
 .upload-label {
@@ -329,4 +330,37 @@ button.add-experience-btn, .remove-btn {
 
 .remove-resume-btn:hover {
     background-color: #d14a46;
+}
+
+.linkedInTop {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    margin-bottom: 20px;
+}
+
+#linkedinWrapper {
+    width: 97%;
+    display: flex;
+}
+
+#linkedinProfile {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f0b598;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: "Albert Sans", serif;
+}
+
+.editable-highlight {
+    background-color: white; /* Light gray background */
+    border: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: "Albert Sans", serif;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
 }

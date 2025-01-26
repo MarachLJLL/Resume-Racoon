@@ -19,10 +19,23 @@
         </div>
     </header>
 
+    <div class="linkedInTop">
+        <div id="linkedinWrapper">
+            <input 
+                type="text" 
+                id="linkedinProfile" 
+                placeholder="Enter your LinkedIn URL"
+                onkeypress="handleLinkedInEnter(event)" 
+            />
+            <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
+        </div>
+    </div>
+    
+   
     <div class="upload-container">
         <label for="fileUpload" class="upload-label">
-          <span id="fileName">Upload resume</span>
-          <input type="file" id="fileUpload" class="upload-input" onchange="handleFileUpload()" />
+            <span id="fileName">Upload resume</span>
+            <input type="file" id="fileUpload" class="upload-input" onchange="handleFileUpload()" />
         </label>
     </div>
 
@@ -37,12 +50,12 @@
             </div>
         
             <div class="accordion-content">
+                <!--- PERSONAL INFORMATION -->
                 <div class="accordion" id="accordion2">
                     <div class="accordion-header" onclick="toggleAccordion('accordion2', 'arrowClosedInner', 'arrowDown')">
                     <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
                     <span>Personal Information</span>
                 </div>
-
                 <div class="accordion-content">
                     <form>
                         <div class="form-group">
@@ -91,7 +104,6 @@
                                 </select>
                             </div>
                         </div>
-                        
 
                         <div class="form-group">
                             <label for="postal">Postal Code:</label>
@@ -100,12 +112,12 @@
                     </form>
                 </div>
 
+                <!--- CONTACT -->
                 <div class="accordion" id="accordion3">
                     <div class="accordion-header" onclick="toggleAccordion('accordion3', 'arrowClosed3', 'arrowDown')">
                     <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
                     <span>Contact</span>
                 </div>
-
                 <div class="accordion-content">
                     <form>
                         <div class="form-group">
@@ -115,7 +127,7 @@
 
                         <div class="form-group">
                             <label for="phoneNumber">Phone number:</label>
-                            <input type="text" id="lastName">
+                            <input type="text" id="phoneNumber">
                         </div>
 
                         <div class="form-group">
@@ -140,18 +152,18 @@
                     </form>
                 </div>
                 
+                <!-- EDUCATION -->
                 <div class="accordion" id="accordion4">
                     <div class="accordion-header" onclick="toggleAccordion('accordion4', 'arrowClosed4', 'arrowDown')">
                     <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
                     <span>Education</span>
                 </div>
-
                 <div class="accordion-content">
                     <div id="educationContainer"></div>
                     <button class="add-education-btn" onclick="addEducation()">Add Education</button>
                 </div>
 
-                
+                <!-- EXPERIENCE -->
                 <div class="accordion" id="accordion5">
                     <div class="accordion-header" onclick="toggleAccordion('accordion5', 'arrowClosed5', 'arrowDown')">
                     <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
@@ -162,12 +174,12 @@
                     <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
                 </div>
                 
+                <!-- LEGAL -->
                 <div class="accordion" id="accordion6">
                     <div class="accordion-header" onclick="toggleAccordion('accordion6', 'arrowClosed6', 'arrowDown')">
                     <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
                     <span>Legal</span>
                 </div>
-
                 <div class="accordion-content">
                     <form>
                         <div class="form-group">
@@ -223,38 +235,26 @@
                             <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
                             <div class="radio-group">
                                 <label for="sponsorship">
-                                    <input type="radio" id="sponsorship" name="sponsorship" value="yes"> Yes
+                                    <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
                                 </label>
                                 <label for="sponsorship">
-                                    <input type="radio" id="sponsorship" name="sponsorship" value="no"> No
+                                    <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
                                 </label>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
-                            <div class="radio-group">
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship" name="sponsorship" value="yes"> Yes
-                                </label>
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship" name="sponsorship" value="no"> No
-                                </label>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label for="disability">Are you a person with a disability?</label>
                             <div class="radio-group">
                                 <label for="disability">
-                                    <input type="radio" id="disability" name="disability" value="yes"> Yes
+                                    <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
                                 </label>
                                 <label for="sponsorship">
-                                    <input type="radio" id="disability" name="disability" value="no"> No
+                                    <input type="radio" id="disability-no" name="disability" value="no"> No
                                 </label>
                             </div>
                         </div>
-                        
                     </form>
                 </div>
             </div>
@@ -266,7 +266,7 @@
         
     </div>
 
-    
+
     <script>
         let educationCount = 0;
 
@@ -409,6 +409,35 @@
             removeResumeBtn.style.display = 'none';
         }
 
+        function handleLinkedInEnter(event) {
+            if (event.key === "Enter") {
+                const inputField = document.getElementById("linkedinProfile");
+                const displaySpan = document.getElementById("linkedinDisplay");
+
+                const inputValue = inputField.value.trim();
+                if (inputValue) {
+                    displaySpan.textContent = inputValue;
+                    inputField.style.display = "none";
+                    displaySpan.style.display = "inline-block";
+
+                    // Add a class to change the background color
+                    displaySpan.classList.add("editable-highlight");
+                }
+            }
+        }
+
+        function editLinkedInText() {
+            const inputField = document.getElementById("linkedinProfile");
+            const displaySpan = document.getElementById("linkedinDisplay");
+
+            inputField.style.display = "inline-block";
+            displaySpan.style.display = "none";
+            inputField.value = displaySpan.textContent; // Load current text into input
+            inputField.focus();
+
+            // Remove the highlight class when editing
+            displaySpan.classList.remove("editable-highlight");
+        }
 
 
         function toggleAccordion(accordionId, imageId1, imageId2) {
