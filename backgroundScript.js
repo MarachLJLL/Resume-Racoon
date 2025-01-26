@@ -4,45 +4,7 @@
  ************************************/
 
 // Profile Classes
-class Profile {
-  constructor() {
-      // Name
-      this.firstName = "";
-      this.middleName = "";
-      this.lastName = "";
 
-      // Contact
-      this.email = "";
-      this.phoneNumber = "";
-      this.address = "";
-      this.address2 = "";
-      this.city = "";
-      this.province = "";
-      this.postalCode = "";
-
-      // URLs
-      this.linkedinProfile = "";
-      this.githubProfile = "";
-      this.website = "";
-      this.portfolio = "";
-
-      // Work Experience
-      this.workExperience = []; // Array of WorkExperience instances
-
-      // Education
-      this.education = []; // Array of Education instances
-
-      // Diversity
-      this.gender = "";
-      this.race = "";
-      this.accessibility = "";
-      this.veteran = "";
-      this.legal = "";
-      this.authorizedToWork = "";
-      this.nonCompeteDisclosure = "";
-      this.disability = "";
-  }
-}
 
 class WorkExperience {
   constructor() {
@@ -93,19 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
     removeResumeBtn.addEventListener('click', removeResume);
   }
 
+  const gatherInfoBtn = document.getElementById('gatherInfoBtn');
+  if (gatherInfoBtn) {
+    console.log("button not null");
+    gatherInfoBtn.addEventListener('click', smartSetup);
+  }
   /************************************************
    * 3. "Gather Info" button
    ************************************************/
-  function updateGatherInfoButton() {
-      const gatherInfoBtn = document.getElementById("gatherInfoBtn");
-      if (!gatherInfoBtn) return;
-    
-      // Always enable the button
-      gatherInfoBtn.disabled = false;
-      gatherInfoBtn.style.opacity = "1";
-      gatherInfoBtn.style.cursor = "pointer";
-    }
-    
+
     // Remove references to LinkedIn logic in event listeners
     document.addEventListener('DOMContentLoaded', () => {
       const fileUpload = document.getElementById('fileUpload');
@@ -117,14 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (removeResumeBtn) {
         removeResumeBtn.addEventListener('click', removeResume);
       }
-    
-      const gatherInfoBtn = document.getElementById('gatherInfoBtn');
-      if (gatherInfoBtn) {
-        gatherInfoBtn.addEventListener('click', smartSetup);
-      }
-    
-      // Initial state updates
-      updateGatherInfoButton();
+     
   });
 
   /************************************************
@@ -184,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * Run initial checks for button states
    ************************************************/
-  updateGatherInfoButton();
   updateButtonStates();
 
   // Load and populate the form with saved data
@@ -293,7 +243,6 @@ function handleFileUpload() {
       fileName.textContent = 'Upload resume';
       removeResumeBtn.style.display = 'none';
   }
-  updateGatherInfoButton();
 }
 
 function removeResume() {
@@ -305,28 +254,6 @@ function removeResume() {
   fileInput.value = '';
   fileName.textContent = 'Upload resume';
   removeResumeBtn.style.display = 'none';
-  updateGatherInfoButton();
-}
-
-/************************************************
-* "Gather Info" Button
-************************************************/
-
-function updateGatherInfoButton() {
-  const linkedinInput = document.getElementById("linkedinProfile")?.value.trim();
-  const fileUploaded  = document.getElementById("fileUpload")?.files.length > 0;
-  const gatherInfoBtn = document.getElementById("gatherInfoBtn");
-  if (!gatherInfoBtn) return;
-
-  if (linkedinInput && fileUploaded) {
-      gatherInfoBtn.disabled = false;
-      gatherInfoBtn.style.opacity = "1";
-      gatherInfoBtn.style.cursor = "pointer";
-  } else {
-      gatherInfoBtn.disabled = true;
-      gatherInfoBtn.style.opacity = "0.5";
-      gatherInfoBtn.style.cursor = "not-allowed";
-  }
 }
 
 /************************************************
