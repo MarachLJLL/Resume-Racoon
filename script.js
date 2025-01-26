@@ -59,10 +59,10 @@ class Education {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-    const buttonSubmit = document.getElementsByClassName("button-19");
-  
+    const buttonSubmit = document.getElementById("save");
+    console.log(buttonSubmit);
     // Attach an event listener to the form submission
-    buttonSubmit.addEventListener("submit", (e) => {
+    buttonSubmit.addEventListener("click", (e) => {
       e.preventDefault(); // Prevent page refresh
   
       // Create a new Profile instance

@@ -237,3 +237,7 @@ const userProfile = constructProfile(apiData);
 
 // Log the Profile to verify
 console.log(userProfile);
+chrome.storage.local.get(["profile"], (result) => {
+    if (result.profile) {
+        const p = result.profile;}});
+console.log(p);

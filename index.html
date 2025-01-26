@@ -4,80 +4,125 @@
   <title>Job Autofill</title>
   <link rel="stylesheet" href="popup.css">
 
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/55d4295bda.js" crossorigin="anonymous"></script>
-</head>
 
+
+  <!-- NOTE: Might cause CSP issues in Chrome extensions (external script) -->
+</head>
 
 <body>
     <header>
-        <img src="https://media.discordapp.net/attachments/1330221441677004876/1332788632767172648/Raccoon_Guitar.png?ex=679687a4&is=67953624&hm=8a4e1d5645e43ae8ca2bc82198b77c93060e2dfc54a07b10318f7965a59c258b&=&format=webp&quality=lossless&width=1132&height=1132" alt="Resume Raccoon Logo" class="logo">
-        <div id = "titleContainer">
+        <img
+          src="https://media.discordapp.net/attachments/1330221441677004876/1332788632767172648/Raccoon_Guitar.png?ex=679687a4&is=67953624&hm=8a4e1d5645e43ae8ca2bc82198b77c93060e2dfc54a07b10318f7965a59c258b&=&format=webp&quality=lossless&width=1132&height=1132" alt="Resume Raccoon Logo" class="logo"
+          alt="Resume Raccoon Logo"
+          class="logo"
+        >
+        <div id="titleContainer">
             <span class="title">resume raccoon</span>
         </div>
     </header>
 
-    <div class="accordion" id="accordion">
-        <div class="accordion-header" onclick="toggleAccordion('accordion', 'arrowClosed0', 'arrowDown')">
-            <img id="arrowClosed0" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
+    <!-- ACCORDION #0: "Smart Setup" -->
+    <div class="accordion" id="accordion0">
+        <div
+          class="accordion-header"
+          id="accordion0Header"
+          data-accordion-target="accordion0Content"
+          data-arrow-closed="arrowClosed0"
+          data-arrow-down="arrowDown0"
+        >
+            <img
+              id="arrowClosed0"
+              src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+            >
             <span>Smart Setup</span>
         </div>
-        <div class="accordion-content">
-            <!--LINKED IN PART-->
+        <div class="accordion-content" id="accordion0Content" style="display: none;">
+            <!-- LINKEDIN PART -->
             <label for="linkedinProfile">Enter your LinkedIn account URL</label>
             <div class="linkedInTop">
                 <div id="linkedinWrapper">
                     <input 
-                        type="text" 
-                        id="linkedinProfile" 
+                        type="text"
+                        id="linkedinProfile"
                         placeholder="LinkedIn URL"
-                        onkeypress="handleLinkedInEnter(event)" 
                     />
-                    <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
+                    <span id="linkedinDisplay" style="display: none;"></span>
                 </div>
             </div>
             
             <div class="upload-container">
                 <label for="fileUpload" class="upload-label">
                     <span id="fileName">Upload resume</span>
-                    <input type="file" id="fileUpload" class="upload-input" onchange="handleFileUpload()" />
+                    <input
+                      type="file"
+                      id="fileUpload"
+                      class="upload-input"
+                    />
                 </label>
             </div>
 
             <div class="remove-resume-container">
-                <button class="remove-resume-btn" id="removeResumeBtn" style="display: none;" onclick="removeResume()">Remove document</button>
+                <button
+                  class="remove-resume-btn"
+                  id="removeResumeBtn"
+                  style="display: none;"
+                >
+                  Remove document
+                </button>
             </div>
 
             <div class="buttonBlock">
                 <button 
                     class="button-19"
-                    id="gatherInfoBtn" 
-                    role="button" 
+                    id="gatherInfoBtn"
+                    role="button"
                     disabled
-                    onclick="gatherInformation()">
-                    Gather information 🦝
+                >
+                    Gather information 
                 </button>
             </div>
         </div>
     </div>
     
 
+    <!-- ACCORDION #1: "Your Application Details" -->
     <div class="accordion" id="accordion1">
-        <div class="accordion-header" onclick="toggleAccordion('accordion1', 'arrowClosedOutter', 'arrowDown')">
-            <img id="arrowClosedOutter" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
+        <div
+          class="accordion-header"
+          id="accordion1Header"
+          data-accordion-target="accordion1Content"
+          data-arrow-closed="arrowClosedOutter"
+          data-arrow-down="arrowDownOutter"
+        >
+            <img
+              id="arrowClosedOutter"
+              src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+            >
             <span>Your Application Details</span>
         </div>
     
-        <div class="accordion-content">
-            <!-- PERSONAL INFORMATION -->
+        <div class="accordion-content" id="accordion1Content" style="display: none;">
+            <!-- PERSONAL INFORMATION (accordion #2) -->
             <div class="accordion" id="accordion2">
-                <div class="accordion-header" onclick="toggleAccordion('accordion2', 'arrowClosedInner', 'arrowDown')">
-                    <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <div
+                  class="accordion-header"
+                  id="accordion2Header"
+                  data-accordion-target="accordion2Content"
+                  data-arrow-closed="arrowClosedInner"
+                  data-arrow-down="arrowDownInner"
+                >
+                    <img
+                      id="arrowClosedInner"
+                      src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+                      alt="Placeholder Image"
+                    >
                     <span>Personal Information</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" id="accordion2Content" style="display: none;">
                     <form>
                         <div class="form-group">
                             <label for="firstName">First Name:</label>
@@ -90,17 +135,17 @@
                         </div>
     
                         <div class="form-group">
-                            <label for="address">Address line 1:</label>
+                            <label for="address1">Address line 1:</label>
                             <input type="text" id="address1">
                         </div>
     
                         <div class="form-group">
-                            <label for="address">Address line 2:</label>
+                            <label for="address2">Address line 2:</label>
                             <input type="text" id="address2">
                         </div>
     
                         <div class="form-group">
-                            <label for="cityOfResidence">City of residence:</label>
+                            <label for="city">City of residence:</label>
                             <input type="text" id="city">
                         </div>
     
@@ -127,20 +172,30 @@
                         </div>
     
                         <div class="form-group">
-                            <label for="postal">Postal Code:</label>
+                            <label for="postalCode">Postal Code:</label>
                             <input type="text" id="postalCode">
                         </div>
                     </form>
                 </div>
             </div>
     
-            <!-- CONTACT -->
+            <!-- CONTACT (accordion #3) -->
             <div class="accordion" id="accordion3">
-                <div class="accordion-header" onclick="toggleAccordion('accordion3', 'arrowClosed3', 'arrowDown')">
-                    <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <div
+                  class="accordion-header"
+                  id="accordion3Header"
+                  data-accordion-target="accordion3Content"
+                  data-arrow-closed="arrowClosed3"
+                  data-arrow-down="arrowDown3"
+                >
+                    <img
+                      id="arrowClosed3"
+                      src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+                      alt="Placeholder Image"
+                    >
                     <span>Contact</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" id="accordion3Content" style="display: none;">
                     <form>
                         <div class="form-group">
                             <label for="email">Email:</label>
@@ -153,7 +208,7 @@
                         </div>
     
                         <div class="form-group">
-                            <label for="linked">LinkedIn:</label>
+                            <label for="linkedin">LinkedIn:</label>
                             <input type="text" id="linkedin">
                         </div>
     
@@ -163,7 +218,7 @@
                         </div>
     
                         <div class="form-group">
-                            <label for="github">Github:</label>
+                            <label for="githubProfile">Github:</label>
                             <input type="text" id="githubProfile">
                         </div>
     
@@ -175,40 +230,74 @@
                 </div>
             </div>
     
-            <!-- EDUCATION -->
+            <!-- EDUCATION (accordion #4) -->
             <div class="accordion" id="accordion4">
-                <div class="accordion-header" onclick="toggleAccordion('accordion4', 'arrowClosed4', 'arrowDown')">
-                    <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <div
+                  class="accordion-header"
+                  id="accordion4Header"
+                  data-accordion-target="accordion4Content"
+                  data-arrow-closed="arrowClosed4"
+                  data-arrow-down="arrowDown4"
+                >
+                    <img
+                      id="arrowClosed4"
+                      src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+                      alt="Placeholder Image"
+                    >
                     <span>Education</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" id="accordion4Content" style="display: none;">
                     <div id="educationContainer"></div>
-                    <button class="add-education-btn" onclick="addEducation()">Add Education</button>
+                    <button class="add-education-btn" id="addEducationBtn" type="button">
+                     Add Education
+                    </button>
                 </div>
             </div>
     
-            <!-- EXPERIENCE -->
+            <!-- EXPERIENCE (accordion #5) -->
             <div class="accordion" id="accordion5">
-                <div class="accordion-header" onclick="toggleAccordion('accordion5', 'arrowClosed5', 'arrowDown')">
-                    <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <div
+                  class="accordion-header"
+                  id="accordion5Header"
+                  data-accordion-target="accordion5Content"
+                  data-arrow-closed="arrowClosed5"
+                  data-arrow-down="arrowDown5"
+                >
+                    <img
+                      id="arrowClosed5"
+                      src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+                      alt="Placeholder Image"
+                    >
                     <span>Experience</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" id="accordion5Content" style="display: none;">
                     <div id="experienceContainer"></div>
-                    <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
+                    <button class="add-experience-btn" id="addExperienceBtn" type="button">
+                     Add Experience
+                    </button>
                 </div>
             </div>
     
-            <!-- LEGAL -->
+            <!-- LEGAL (accordion #6) -->
             <div class="accordion" id="accordion6">
-                <div class="accordion-header" onclick="toggleAccordion('accordion6', 'arrowClosed6', 'arrowDown')">
-                    <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <div
+                  class="accordion-header"
+                  id="accordion6Header"
+                  data-accordion-target="accordion6Content"
+                  data-arrow-closed="arrowClosed6"
+                  data-arrow-down="arrowDown6"
+                >
+                    <img
+                      id="arrowClosed6"
+                      src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+                      alt="Placeholder Image"
+                    >
                     <span>Legal</span>
                 </div>
-                <div class="accordion-content">
+                <div class="accordion-content" id="accordion6Content" style="display: none;">
                     <form>
                         <div class="form-group">
-                            <label for="province">Gender:</label>
+                            <label for="gender">Gender:</label>
                             <div class="select-wrapper">
                                 <select id="gender" name="gender">
                                     <option value="" disabled selected>Select your gender</option>
@@ -221,61 +310,61 @@
                         </div>
     
                         <div class="form-group">
-                            <label for="nonCompeteDisclosure">Have you signed a non-compete that will affect your employment for this firm?</label>
+                            <label>Have you signed a non-compete that will affect your employment for this firm?</label>
                             <div class="radio-group">
-                                <label for="nonCompeteDisclosure">
-                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="yes"> Yes
+                                <label>
+                                    <input type="radio" name="nonCompeteDisclosure" value="yes"> Yes
                                 </label>
-                                <label for="nonCompeteDisclosure">
-                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="no"> No
+                                <label>
+                                    <input type="radio" name="nonCompeteDisclosure" value="no"> No
                                 </label>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label for="veteran">Are you a protected veteran?</label>
+                            <label>Are you a protected veteran?</label>
                             <div class="radio-group">
-                                <label for="veteran">
-                                    <input type="radio" id="veteran" name="veteran" value="yes"> Yes
+                                <label>
+                                    <input type="radio" name="veteran" value="yes"> Yes
                                 </label>
-                                <label for="veteran">
-                                    <input type="radio" id="veteran" name="veteran" value="no"> No
+                                <label>
+                                    <input type="radio" name="veteran" value="no"> No
                                 </label>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label for="authorizedToWork">Are you legally eligible to work where this job is located?</label>
+                            <label>Are you legally eligible to work where this job is located?</label>
                             <div class="radio-group">
-                                <label for="authorizedToWork">
-                                    <input type="radio" id="authorizedToWork" name="legal" value="yes"> Yes
+                                <label>
+                                    <input type="radio" name="legal" value="yes"> Yes
                                 </label>
-                                <label for="authorizedToWork">
-                                    <input type="radio" id="authorizedToWork" name="legal" value="no"> No
+                                <label>
+                                    <input type="radio" name="legal" value="no"> No
                                 </label>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
+                            <label>Will you, now or in the future, require sponsorship for your employment status?</label>
                             <div class="radio-group">
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
+                                <label>
+                                    <input type="radio" name="sponsorship" value="yes"> Yes
                                 </label>
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
+                                <label>
+                                    <input type="radio" name="sponsorship" value="no"> No
                                 </label>
                             </div>
                         </div>
     
                         <div class="form-group">
-                            <label for="disability">Are you a person with a disability?</label>
+                            <label>Are you a person with a disability?</label>
                             <div class="radio-group">
-                                <label for="disability">
-                                    <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
+                                <label>
+                                    <input type="radio" name="disability" value="yes"> Yes
                                 </label>
-                                <label for="disability">
-                                    <input type="radio" id="disability-no" name="disability" value="no"> No
+                                <label>
+                                    <input type="radio" name="disability" value="no"> No
                                 </label>
                             </div>
                         </div>
@@ -284,56 +373,80 @@
             </div>
 
             <div class="buttonBlock">
-                <button class="button-19" role="button">Save  ✅</button>
+                <button class="button-19" id="save" role="button">Save</button>
             </div>
         </div>
     </div>
     
-    <!--Job Description URL-->
+    <!-- Job Description URL (Outside Acccordion) -->
     <label for="jobDescriptionURL">Enter the job description URL</label>
     <div class="jobDescriptionTop">
         <div id="jobWrapper">
-            <input 
-                type="text" 
-                id="jobProfile" 
-                placeholder="Job description url"
-                oninput="updateJobFeaturesState()" 
+            <input
+              type="text"
+              id="jobProfile"
+              placeholder="Job description url"
             />
-            <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
+            <span id="linkedinDisplay2" style="display: none;"></span>
         </div>
     </div>
 
+    <!-- ACCORDION #7: "Generate cover letter" etc. -->
     <div class="accordion" id="accordion7">
-        <div class="accordion-header" onclick="toggleAccordion('accordion7', 'arrowClosed7', 'arrowClosed7')">
-            <img id="arrowClosed7" src="https://cdn.discordapp.com/attachments/1332823197543829606/1332979659754704937/caret-right-svgrepo-com.png?ex=6797398c&is=6795e80c&hm=38ed4517c73ab7f9889c7fd8445f01c4b127d7b17938138e95205edb42011eff&">
-            <span id="generateFeature" style="opacity: 0.5; cursor: not-allowed; color: #aca6a6;">
+        <div
+          class="accordion-header"
+          id="accordion7Header"
+          data-accordion-target="accordion7Content"
+          data-arrow-closed="arrowClosed7"
+          data-arrow-down="arrowDown7"
+        >
+            <img
+              id="arrowClosed7"
+              src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132"
+            >
+            <span id="generateFeature" style="opacity: 0.5; cursor: not-allowed;">
                 Generate cover letter + Track job with spreadsheet + Interview preparation questions
             </span>
         </div>
-
-        <div class="accordion-content">
+        <div class="accordion-content" id="accordion7Content" style="display: none;">
             <div class="buttonBlock">
-                <button id="generateCoversheetBtn" class="button-19" onclick="generateCoversheet()" disabled>Generate cover sheet  📄</button>
+                <button id="generateCoversheetBtn" class="button-19" disabled>
+                  Generate cover sheet 
+                </button>
             </div>
 
             <div class="form-group">
                 <label id="googleSheetLink-label" for="googleSheetLink">Link to Google Sheet</label>
-                <input type="text" id="googleSheetLink" placeholder="Enter Google Sheet link" oninput="enableGenerateButton()" />
+                <input type="text" id="googleSheetLink" placeholder="Enter Google Sheet link">
             </div>
 
             <div class="buttonBlock">
-                <button id="addJobBtn" class="button-19" onclick="generateCoversheet()" disabled>Add job to spreadsheet  📊</button>
+                <button id="addJobBtn" class="button-19" disabled>
+                  Add job to spreadsheet 
+                </button>
             </div>
         </div>
     </div>
 
     <div class="autofill-box">
-        <div style="width:10%;height:0;padding-bottom:10%; padding-right: 30px;position:relative;"><iframe src="https://giphy.com/embed/pIIqPCqcCJidJFes95" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p></p>
-        <button class="autofill-button" onclick="autoFill()">Auto-Fill 🔥</button>
+        <div style="width:10%;height:0;padding-bottom:10%; padding-right: 30px;position:relative;">
+          <iframe
+            src="https://giphy.com/embed/pIIqPCqcCJidJFes95"
+            width="100%"
+            height="100%"
+            style="position:absolute"
+            frameBorder="0"
+            class="giphy-embed"
+            allowFullScreen
+          ></iframe>
+        </div>
+        <button class="autofill-button" id="autoFillBtn">
+          Auto-Fill 
+        </button>
     </div>
 
-    
+    <!-- EXTERNAL SCRIPT -->
     <script src="backgroundScript.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
