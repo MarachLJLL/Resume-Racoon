@@ -25,7 +25,8 @@
             "js": [
                 "classes/Education.js",
                 "classes/WorkExperience.js",
-                "classes/Profile.js"
+                "classes/Profile.js",
+                "shortAnswer.js"
             ],
             "all_frames": true
         },

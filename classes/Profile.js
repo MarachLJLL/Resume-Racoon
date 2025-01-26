@@ -223,3 +223,11 @@ let p = userProfile;
 
 // Log the Profile to verify
 console.log(userProfile);
+let profile = p
+chrome.storage.local.set({ profile }, () => {
+    //alert("Profile saved successfully!");
+    console.log("Saved Profile:", profile); // For debugging
+
+    // Reload the profile to ensure form is updated with saved data
+    loadProfilePromise();
+});

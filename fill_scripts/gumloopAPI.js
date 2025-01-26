@@ -70,21 +70,19 @@ function getResponse(runid) {
         .then((response) => response.json())
         .then((data) => {
           console.log('Polling response:', data);
-  
-          // Check if the status is Done
+          
           if (data.state === 'DONE') {
             console.log("done");
             // Stop polling
             clearInterval(intervalId);
-  
             // Place the response in the textbox
-            // (Replace 'response' with the appropriate key from your data object if it's different)
             const resultDiv = document.getElementById('myResultDiv');
               if (resultDiv) {
                 // Adjust property name as needed depending on your API's response structure
                 console.log(data.outputs)
                 resultDiv.textContent = data.outputs['coverletter'] || 'Cover letter is ready!';
               }
+            //luis 
           }
         })
         .catch((err) => {

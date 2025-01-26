@@ -1,9 +1,70 @@
+function loadProfilePromise() {
+    return new Promise((resolve, reject) => {
+        chrome.storage.local.get(['profile'], (result) => {
+            if (chrome.runtime.lastError) {
+                reject(chrome.runtime.lastError);
+                return;
+            }
+
+            if (result.profile) {
+                const profile = result.profile;
+
+                // Populate static fields
+                populateStaticFields(profile);
+
+                // Clear existing dynamic entries
+                clearDynamicEntries();
+
+                // Populate Education entries
+                if (Array.isArray(profile.education) && profile.education.length > 0) {
+                    profile.education.forEach((edu) => {
+                        addEducation(edu); // Pass the education data to prepopulate
+                    });
+                }
+
+                // Populate Work Experience entries
+                if (Array.isArray(profile.workExperience) && profile.workExperience.length > 0) {
+                    profile.workExperience.forEach((exp) => {
+                        addExperience(exp); // Pass the experience data to prepopulate
+                    });
+                }
+
+                // Populate Diversity fields
+                populateDiversityFields(profile);
+
+                // Initialize counters based on loaded forms
+                initializeCounters();
+
+                console.log("Profile loaded successfully:", profile);
+                resolve(profile);
+            } else {
+                console.log("No profile data found.");
+                resolve(null);
+            }
+        });
+    });
+}
+
 class TextInput {
     constructor(inputElement, profile) {
         this.inputElement = inputElement;
         this.type = inputElement.type;
         this.classification = this._setClassification();
         this.profile = profile
+    }
+    
+    async fillShortAns() {
+        q = this.inputElement.parentElement.parentElement.activeElement.textContent
+        p = loadProfilePromise()
+        prompt = `
+            This is my profile: ${p}
+            And this is the text surrounding a text prompt I want ot respond to
+            in a job application: ${q}
+
+            Based on my profile, please respond to that question.
+        `
+        console.log(prompt)
+        this.inputElement.value = await askSingleQuestion(prompt)
     }
 
     _setClassification(ct = ((this.inputElement.name || "") + (this.inputElement.id || "") + (this.inputElement.autocomplete || "") + (this.inputElement.getAttribute("data-automation-id") || "")).toLowerCase(), layer_up = 0) {
@@ -74,10 +135,10 @@ class TextInput {
             return this._setClassification(ct, layer_up + 1)
         } else {
             // insert Isaac short answer API call here
+            this.fillShortAns()
         }
         
     }
-    
 
     toString() {
         return `
@@ -252,15 +313,19 @@ if (/.*wd3.*/.test(window.location.href)) {
 } else {
     fillText()
 }
+try {
+    setTimeout(() => {
+        let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]')
+        nextButton.addEventListener('click', () => {
+            setTimeout(() => {
+                fillText();
+            }, 5000);
+        });
+    }, delay)
+} catch (error) {
+    console.log(error)
+}
 
-setTimeout(() => {
-    let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]')
-    nextButton.addEventListener('click', () => {
-        setTimeout(() => {
-            fillText();
-        }, 5000);
-    });
-}, delay)
 
 async function getProfile() {
     try {
