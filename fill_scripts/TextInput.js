@@ -129,7 +129,7 @@ class TextInput {
                 this.inputElement.value = this.profile.postalCode;
                 break;
             case "linkedinProfile":
-                this.inputElement.value = this.profile.linkedinProfile;
+                this.inputElement.value = this.profile.linkedIn;
                 break;
             case "githubProfile":
                 this.inputElement.value = this.profile.githubProfile;

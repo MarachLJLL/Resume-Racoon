@@ -1,11 +1,11 @@
 class Education {
     constructor() {
-        this.university;
-        this.degree; // This should be a dropdown
-        this.fieldOfStudy;
-        this.gpa;
-        this.startDate;
-        this.endDate;
+        this.university = "";
+        this.degree = "";          // e.g., "Bachelor of Software Engineering"
+        this.fieldOfStudy = "";    // e.g., "Applied Artificial Intelligence"
+        this.gpa = "";
+        this.startDate = "";       // Format: "Sep. 2019"
+        this.endDate = "";         // Format: "May 2022"
     }
 }
 

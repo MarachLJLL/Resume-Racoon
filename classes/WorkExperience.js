@@ -1,11 +1,11 @@
 class WorkExperience {
     constructor() {
-        this.jobTitle;
-        this.company;
-        this.location;
-        this.startDate; // MM/DD/YYYY
-        this.endDate;
-        this.roleDescription;
+        this.jobTitle = "";
+        this.company = "";
+        this.location = "";
+        this.startDate = ""; // Format: "Sep. 2022"
+        this.endDate = "";   // Format: "May 2027"
+        this.roleDescription = "";
     }
 }
 
