@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
     const fileUpload = document.getElementById('fileUpload');
     if (fileUpload) {
-      fileUpload.addEventListener('change', handleFileUpload);
+      fileUpload.addEventListener('change', handleFileUpload(event));
     }
   
     const removeResumeBtn = document.getElementById('removeResumeBtn');
@@ -61,12 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
      ************************************************/
     const generateCoversheetBtn = document.getElementById('generateCoversheetBtn');
     if (generateCoversheetBtn) {
-      generateCoversheetBtn.addEventListener('click', generateCoversheet);
+      generateCoversheetBtn.addEventListener('click', generateCoverLetter);
     }
   
     const addJobBtn = document.getElementById('addJobBtn');
     if (addJobBtn) {
-      addJobBtn.addEventListener('click', generateCoversheet);
+      addJobBtn.addEventListener('click', addToSheets);
     }
   
     const googleSheetLink = document.getElementById('googleSheetLink');
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * File Upload / Resume
    ************************************************/
-  function handleFileUpload() {
+  function handleFileUpload(event) {
     const fileInput      = document.getElementById('fileUpload');
     const fileName       = document.getElementById('fileName');
     const removeResumeBtn= document.getElementById('removeResumeBtn');

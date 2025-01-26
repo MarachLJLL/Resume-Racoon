@@ -7,7 +7,7 @@
 
     },
     "manifest_version": 3,
-    "permissions": ["storage", "scripting", "activeTab"],
+    "permissions": ["storage", "scripting", "activeTab", "downloads"],
     "host_permissions": ["<all_urls>"],
     "action": {
         "default_popup": "index.html",
