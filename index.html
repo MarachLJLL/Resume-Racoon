@@ -26,6 +26,10 @@
         </label>
     </div>
 
+    <div class="remove-resume-container">
+        <button class="remove-resume-btn" id="removeResumeBtn" style="display: none;" onclick="removeResume()">Remove document</button>
+    </div>
+
     <div class="accordion" id="accordion1">
         <div class="accordion-header" onclick="toggleAccordion('accordion1', 'arrowClosedOutter', 'arrowDown')">
             <img id="arrowClosedOutter" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
@@ -153,11 +157,9 @@
                     <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
                     <span>Experience</span>
                 </div>
-
                 <div class="accordion-content">
-                    <form>
-                        
-                    </form>
+                    <div id="experienceContainer"></div>
+                    <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
                 </div>
                 
                 <div class="accordion" id="accordion6">
@@ -175,6 +177,7 @@
                                     <option value="" disabled selected>Select your gender</option>
                                     <option value="female">Female</option>
                                     <option value="male">Male</option>
+                                    <option value="other">Other</option>
                                     <option value="doNotIdentify">I don't wish to answer</option>
                                 </select>
                             </div>
@@ -254,9 +257,6 @@
                         
                     </form>
                 </div>
-
-                
-
             </div>
         </div>
 
@@ -266,6 +266,7 @@
         
     </div>
 
+    
     <script>
         let educationCount = 0;
 
@@ -280,7 +281,7 @@
 
             educationForm.innerHTML = `
                 <div class="form-group">
-                    <label for="university-${educationCount}">University:</label>
+                    <label for="university-${educationCount}">University/Institution:</label>
                     <input type="text" id="university-${educationCount}" name="university">
                 </div>
                 <div class="form-group">
@@ -288,10 +289,22 @@
                     <select id="degree-${educationCount}" name="degree">
                         <option value="" disabled selected>Select your degree</option>
                         <option value="High School Diploma">High School Diploma</option>
+                        <option value="GED">GED (General Educational Development)</option>
                         <option value="Associate's Degree">Associate's Degree</option>
                         <option value="Bachelor's Degree">Bachelor's Degree</option>
                         <option value="Master's Degree">Master's Degree</option>
                         <option value="Doctorate">Doctorate</option>
+                        <option value="College Degree">College Degree</option>
+                        <option value="CEGEP">CEGEP</option>
+                        <option value="Professional Degree">Professional Degree (e.g., MD, JD)</option>
+                        <option value="Certificate">Certificate</option>
+                        <option value="Diploma">Diploma</option>
+                        <option value="Postgraduate Diploma">Postgraduate Diploma</option>
+                        <option value="Vocational Training">Vocational Training</option>
+                        <option value="Technical Diploma">Technical Diploma</option>
+                        <option value="Executive Education">Executive Education</option>
+                        <option value="Continuing Education">Continuing Education</option>
+                        <option value="No Formal Education">No Formal Education</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -303,11 +316,11 @@
                     <input type="number" id="gpa-${educationCount}" name="gpa" step="0.01" min="0" max="4">
                 </div>
                 <div class="form-group">
-                    <label for="startDate-${educationCount}">Start Date:</label>
+                    <label for="startDate-${educationCount}">Start date:</label>
                     <input type="date" id="startDate-${educationCount}" name="startDate">
                 </div>
                 <div class="form-group">
-                    <label for="endDate-${educationCount}">End Date:</label>
+                    <label for="endDate-${educationCount}">End date/Expected graduation:</label>
                     <input type="date" id="endDate-${educationCount}" name="endDate">
                 </div>
                 <button class="remove-btn" onclick="removeEducation(${educationCount})">Remove entry</button>
@@ -323,18 +336,81 @@
             }
         }
 
+        let experienceCount = 0;
 
+        function addExperience() {
+            experienceCount++;
+
+            const experienceContainer = document.getElementById("experienceContainer");
+
+            const experienceForm = document.createElement("div");
+            experienceForm.classList.add("experience-form");
+            experienceForm.setAttribute("id", `experience-form-${experienceCount}`);
+
+            experienceForm.innerHTML = `
+                <div class="form-group">
+                    <label for="jobTitle-${experienceCount}">Job Title:</label>
+                    <input type="text" id="jobTitle-${experienceCount}" name="jobTitle" placeholder="Enter your job title" required>
+                </div>
+                <div class="form-group">
+                    <label for="company-${experienceCount}">Company:</label>
+                    <input type="text" id="company-${experienceCount}" name="company" placeholder="Enter company name" required>
+                </div>
+                <div class="form-group">
+                    <label for="location-${experienceCount}">Location:</label>
+                    <input type="text" id="location-${experienceCount}" name="location" placeholder="Enter job location" required>
+                </div>
+                <div class="form-group">
+                    <label for="startDate-${experienceCount}">Start Date:</label>
+                    <input type="date" id="startDate-${experienceCount}" name="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate-${experienceCount}">End Date:</label>
+                    <input type="date" id="endDate-${experienceCount}" name="endDate">
+                </div>
+                <div class="form-group">
+                    <label for="roleDescription-${experienceCount}">Role Description:</label>
+                    <textarea id="roleDescription-${experienceCount}" name="roleDescription" placeholder="Describe your responsibilities" rows="4" required></textarea>
+                </div>
+                <button class="remove-btn" onclick="removeExperience(${experienceCount})">Remove Entry</button>
+            `;
+
+            experienceContainer.appendChild(experienceForm);
+        }
+
+        function removeExperience(id) {
+            const experienceForm = document.getElementById(`experience-form-${id}`);
+            if (experienceForm) {
+                experienceForm.remove();
+            }
+        }
 
         function handleFileUpload() {
             const fileInput = document.getElementById('fileUpload');
             const fileName = document.getElementById('fileName');
+            const removeResumeBtn = document.getElementById('removeResumeBtn');
 
             if (fileInput.files.length > 0) {
                 fileName.textContent = fileInput.files[0].name;
+                removeResumeBtn.style.display = 'block';
             } else {
-                fileName.textContent = 'upload your resume';
+                fileName.textContent = 'Upload resume';
+                removeResumeBtn.style.display = 'none';
             }
         }
+
+        function removeResume() {
+            const fileInput = document.getElementById('fileUpload');
+            const fileName = document.getElementById('fileName');
+            const removeResumeBtn = document.getElementById('removeResumeBtn');
+
+            fileInput.value = '';
+            fileName.textContent = 'Upload resume';
+            removeResumeBtn.style.display = 'none';
+        }
+
+
+
         function toggleAccordion(accordionId, imageId1, imageId2) {
             const accordion = document.getElementById(accordionId);
             const content = accordion.querySelector('.accordion-content');

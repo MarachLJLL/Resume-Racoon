@@ -186,7 +186,7 @@ select {
     background-color: white;
     font-size: 16px; 
     color: #4E4138; 
-    border: none; 
+    border: 0px; 
     appearance: none; 
     -webkit-appearance: none; 
     -moz-appearance: none; 
@@ -195,23 +195,22 @@ select {
 }
 
 select::after {
-    content: ''; /* Remove native arrow */
+    content: ''; 
 }
 
 .select-wrapper {
-    position: relative; /* Needed for custom arrow positioning */
+    position: relative;
     display: flex;
     align-items: center;
-    width: 100%; /* Match parent width */
+    width: 100%;
 }
 
 .select-wrapper::after {
-    content: '▼'; /* Add custom arrow */
     font-size: 14px;
-    color: #4E4138; /* Match dropdown text color */
+    color: #4E4138; 
     position: absolute;
-    right: 15px; /* Position to the right */
-    pointer-events: none; /* Ensure it doesn't interfere with dropdown functionality */
+    right: 15px; 
+    pointer-events: none; 
 }
 
 .radio-group {
@@ -233,20 +232,11 @@ select::after {
     margin-right: 10px;
 }
 
-education-form {
-    margin-bottom: 20px;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
-
 .form-group {
     margin-bottom: 15px;
 }
 
 label {
-    font-weight: bold;
     display: block;
     margin-bottom: 5px;
 }
@@ -263,7 +253,7 @@ button.add-education-btn, button.submit-education-btn, .remove-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 15px;
+    padding: 10px;
     background-color: #f0b598;
     color: white;
     font-size: 14px;
@@ -279,7 +269,64 @@ button.submit-education-btn {
 .remove-btn {
     background-color: #e5766e;
     margin-top: 10px;
-    margin-bottom: 10px;
 }
 
 
+.experience-form, .education-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select, textarea {
+    width: 95%;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: "Albert Sans", serif;
+}
+
+button.add-experience-btn, .remove-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f0b598;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.remove-resume-container {
+    display: flex;
+    justify-content: center;
+}
+
+.remove-resume-btn {
+    padding: 10px 15px;
+    background-color: #e5766e;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.remove-resume-btn:hover {
+    background-color: #d14a46;
+}
