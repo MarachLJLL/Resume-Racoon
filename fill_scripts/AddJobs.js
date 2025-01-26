@@ -12,7 +12,11 @@ const formattedDate = `${month}/${day}/${year}`;
 
 const currentDate = new Date(formattedDate);
 
-
+function startWorkFlow() {
+  console.log("Starting Work Experience flow...");
+  getButtons();
+  clickButtonWithDelay();
+}
 // 1. Finds the button whose aria-label contains "add" and "work"
 function getButtons() {
   const buttons = document.querySelectorAll('[aria-label]');
@@ -43,6 +47,8 @@ function clickButtonWithDelay() {
       // Schedule the next click after 1 second total
       setTimeout(clickButtonWithDelay, 1000);
     }, 1000);
+  }else{
+    startEducationFlow();
   }
 }
 
@@ -208,8 +214,11 @@ let eduClickCount = 0;
 
 function startEducationFlow() {
 console.log("Starting Education flow...");
-getEducationButtons();
-clickEducationWithDelay();
+setTimeout(()=>{
+  getEducationButtons();
+  clickEducationWithDelay();
+}, 10000)
+
 }
 
 // 1) Find the "Add Education" button

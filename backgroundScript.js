@@ -82,11 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * 2. LinkedIn, File Upload, Remove Resume
    ************************************************/
-  const linkedinProfile = document.getElementById('linkedinProfile');
-  if (linkedinProfile) {
-    // Replaces onkeypress="handleLinkedInEnter(event)"
-    linkedinProfile.addEventListener('keypress', handleLinkedInEnter);
-  }
 
   const fileUpload = document.getElementById('fileUpload');
   if (fileUpload) {
@@ -101,10 +96,36 @@ document.addEventListener('DOMContentLoaded', () => {
   /************************************************
    * 3. "Gather Info" button
    ************************************************/
-  const gatherInfoBtn = document.getElementById('gatherInfoBtn');
-  if (gatherInfoBtn) {
-    gatherInfoBtn.addEventListener('click', gatherInformation);
-  }
+  function updateGatherInfoButton() {
+      const gatherInfoBtn = document.getElementById("gatherInfoBtn");
+      if (!gatherInfoBtn) return;
+    
+      // Always enable the button
+      gatherInfoBtn.disabled = false;
+      gatherInfoBtn.style.opacity = "1";
+      gatherInfoBtn.style.cursor = "pointer";
+    }
+    
+    // Remove references to LinkedIn logic in event listeners
+    document.addEventListener('DOMContentLoaded', () => {
+      const fileUpload = document.getElementById('fileUpload');
+      if (fileUpload) {
+        fileUpload.addEventListener('change', handleFileUpload);
+      }
+    
+      const removeResumeBtn = document.getElementById('removeResumeBtn');
+      if (removeResumeBtn) {
+        removeResumeBtn.addEventListener('click', removeResume);
+      }
+    
+      const gatherInfoBtn = document.getElementById('gatherInfoBtn');
+      if (gatherInfoBtn) {
+        gatherInfoBtn.addEventListener('click', smartSetup);
+      }
+    
+      // Initial state updates
+      updateGatherInfoButton();
+  });
 
   /************************************************
    * 4. "Add Education", "Add Experience"
@@ -229,10 +250,41 @@ function handleLinkedInEnter(event) {
 * File Upload / Resume
 ************************************************/
 function handleFileUpload() {
+  console.log('detected');
   const fileInput      = document.getElementById('fileUpload');
   const fileName       = document.getElementById('fileName');
   const removeResumeBtn= document.getElementById('removeResumeBtn');
-  if (!fileInput || !fileName || !removeResumeBtn) return;
+  const pdfFile = fileInput.files[0];
+  console.log(pdfFile.type);
+  if (pdfFile.type !== 'application/pdf'){
+    console.log("not pdf file");
+    return
+  }
+  // Create a FileReader to read the file
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const dataUrl = e.target.result;
+    console.log(dataUrl);
+    const base64StartIndex = dataUrl.indexOf(',') + 1;
+    const base64String = dataUrl.substring(base64StartIndex);
+
+      // Display the Base64 string
+    pdfName = fileName.textContent;
+    console.log(base64String);
+    const options = {
+      method: 'POST',
+      headers: {Authorization: `Bearer ${GUMLOOP_API_KEY}`, 'Content-Type': 'application/json'},
+      body: JSON.stringify({"file_name":pdfName,"file_content":base64String,"user_id":"JKN6WFfBqzVwBCNqMCQEkKDy6EA3"})
+    };
+    
+    fetch('https://api.gumloop.com/api/v1/upload_file', options)
+      .then(response => response.json())
+      .then(data => {
+        console.log('fileupload response: ', data);
+        })
+      .catch(err => console.error(err));
+  };
+  reader.readAsDataURL(pdfFile);
 
   if (fileInput.files.length > 0) {
       fileName.textContent = fileInput.files[0].name;
@@ -259,9 +311,6 @@ function removeResume() {
 /************************************************
 * "Gather Info" Button
 ************************************************/
-function gatherInformation() {
-  alert("Gathering information from LinkedIn and Resume!");
-}
 
 function updateGatherInfoButton() {
   const linkedinInput = document.getElementById("linkedinProfile")?.value.trim();
