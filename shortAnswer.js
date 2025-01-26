@@ -139,29 +139,29 @@ async function startFlowRun(prompt) {
   // -- Example usage of multiple prompts --
   //
   
-  (async () => {
-    try {
-      // An array of questions you want to ask
-      const questions = [
-        "what is 2+2",
-        "what is 4+4",
-        "what is 8+8"
-      ];
+  // (async () => {
+  //   try {
+  //     // An array of questions you want to ask
+  //     const questions = [
+  //       "what is 2+2",
+  //       "what is 4+4",
+  //       "what is 8+8"
+  //     ];
   
-      // Ask them sequentially
-      const results = await askMultipleQuestions(questions);
+  //     // Ask them sequentially
+  //     const results = await askMultipleQuestions(questions);
   
-      // Log final results
-      console.log("\nAll questions answered!");
-      console.log(JSON.stringify(results, null, 2));
+  //     // Log final results
+  //     console.log("\nAll questions answered!");
+  //     console.log(JSON.stringify(results, null, 2));
       
-      // Each item in `results` is:
-      // {
-      //   prompt: "...",
-      //   outputs: { /* from final flow output for that prompt */ }
-      // }
-    } catch (error) {
-      console.error("Overall error:", error);
-    }
-  })();
+  //     // Each item in `results` is:
+  //     // {
+  //     //   prompt: "...",
+  //     //   outputs: { /* from final flow output for that prompt */ }
+  //     // }
+  //   } catch (error) {
+  //     console.error("Overall error:", error);
+  //   }
+  // })();
   

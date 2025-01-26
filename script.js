@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       // Save the profile to Chrome local storage
       chrome.storage.local.set({ profile }, () => {
-        alert("Profile saved successfully!");
+        //alert("Profile saved successfully!");
         console.log("Saved Profile:", profile); // For debugging
       });
     });

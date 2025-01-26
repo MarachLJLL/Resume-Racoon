@@ -70,7 +70,7 @@ function getResponse(runid) {
         .then((response) => response.json())
         .then((data) => {
           console.log('Polling response:', data);
-  
+          
           if (data.state === 'DONE') {
             console.log("done");
             // Stop polling

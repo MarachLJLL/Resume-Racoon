@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateButtonStates();
 
   // Load and populate the form with saved data
-  loadProfile();
+  loadProfilePromise();
 });
 
 /************************************************
@@ -577,13 +577,16 @@ function updateJobFeaturesState() {
 /************************************************
 * loadProfile Function
 ************************************************/
-function loadProfile() {
+function loadProfilePromise() {
   chrome.storage.local.get(['profile'], (result) => {
       if (result.profile) {
           const profile = result.profile;
 
           // Populate static fields
           populateStaticFields(profile);
+
+          // Clear existing dynamic entries
+          clearDynamicEntries();
 
           // Populate Education entries
           if (Array.isArray(profile.education) && profile.education.length > 0) {
@@ -606,6 +609,7 @@ function loadProfile() {
           initializeCounters();
 
           console.log("Profile loaded successfully:", profile);
+          return profile
       } else {
           console.log("No profile data found.");
       }
@@ -744,12 +748,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // Save the profile to Chrome local storage
           chrome.storage.local.set({ profile }, () => {
-              alert("Profile saved successfully!");
+              //alert("Profile saved successfully!");
               console.log("Saved Profile:", profile); // For debugging
 
               // Reload the profile to ensure form is updated with saved data
-              loadProfile();
+              loadProfilePromise();
           });
       });
   }
 });
+
+/************************************************
+* Helper Function: Clear Dynamic Entries
+************************************************/
+function clearDynamicEntries() {
+    const educationContainer = document.getElementById("educationContainer");
+    if (educationContainer) {
+        educationContainer.innerHTML = "";
+    }
+
+    const experienceContainer = document.getElementById("experienceContainer");
+    if (experienceContainer) {
+        experienceContainer.innerHTML = "";
+    }
+
+    // Reset counters to ensure unique IDs for new entries
+    educationCount = 0;
+    experienceCount = 0;
+}
