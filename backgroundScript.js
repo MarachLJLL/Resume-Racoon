@@ -218,23 +218,30 @@ document.addEventListener('DOMContentLoaded', () => {
    * "Add Education" / "Add Experience"
    ************************************************/
   let educationCount = 0;
+
   function addEducation() {
     educationCount++;
+  
+    // Create a local copy so each form references a unique ID
+    const localCount = educationCount;
+  
     const educationContainer = document.getElementById("educationContainer");
     if (!educationContainer) return;
   
+    // Create the wrapper <div> for this education entry
     const educationForm = document.createElement("div");
     educationForm.classList.add("education-form");
-    educationForm.id = `education-form-${educationCount}`;
+    educationForm.id = `education-form-${localCount}`;
   
+    // Build the HTML WITHOUT inline onclick
     educationForm.innerHTML = `
       <div class="form-group">
-          <label for="university-${educationCount}">University/Institution:</label>
-          <input type="text" id="university-${educationCount}" name="university">
+          <label for="university-${localCount}">University/Institution:</label>
+          <input type="text" id="university-${localCount}" name="university">
       </div>
       <div class="form-group">
-          <label for="degree-${educationCount}">Degree:</label>
-          <select id="degree-${educationCount}" name="degree">
+          <label for="degree-${localCount}">Degree:</label>
+          <select id="degree-${localCount}" name="degree">
               <option value="" disabled selected>Select your degree</option>
               <option value="High School Diploma">High School Diploma</option>
               <option value="GED">GED (General Educational Development)</option>
@@ -256,115 +263,142 @@ document.addEventListener('DOMContentLoaded', () => {
           </select>
       </div>
       <div class="form-group">
-          <label for="field-${educationCount}">Field of Study:</label>
-          <input type="text" id="field-${educationCount}" name="fieldOfStudy">
+          <label for="field-${localCount}">Field of Study:</label>
+          <input type="text" id="field-${localCount}" name="fieldOfStudy">
       </div>
       <div class="form-group">
-          <label for="gpa-${educationCount}">GPA:</label>
-          <input type="number" id="gpa-${educationCount}" name="gpa" step="0.01" min="0" max="4">
+          <label for="gpa-${localCount}">GPA:</label>
+          <input type="number" id="gpa-${localCount}" name="gpa" step="0.01" min="0" max="4">
       </div>
       <div class="form-group">
-          <label for="startDate-${educationCount}">Start date:</label>
-          <input type="date" id="startDate-${educationCount}" name="startDate">
+          <label for="startDate-${localCount}">Start date:</label>
+          <input type="date" id="startDate-${localCount}" name="startDate">
       </div>
       <div class="form-group">
-          <label for="endDate-${educationCount}">End date/Expected graduation:</label>
-          <input type="date" id="endDate-${educationCount}" name="endDate">
+          <label for="endDate-${localCount}">End date/Expected graduation:</label>
+          <input type="date" id="endDate-${localCount}" name="endDate">
       </div>
-      <button class="remove-btn" onclick="removeEducation(${educationCount})">Remove entry</button>
+      <!-- We add a button with NO inline onclick -->
+      <button class="remove-btn" type="button">Remove entry</button>
     `;
   
+    // Append the HTML to the container
     educationContainer.appendChild(educationForm);
+  
+    // Select the "Remove entry" button within this newly created form
+    const removeButton = educationForm.querySelector(".remove-btn");
+  
+    // Attach an event listener instead of inline onclick
+    removeButton.addEventListener("click", () => {
+      removeEducation(localCount);
+    });
   }
   
   function removeEducation(id) {
     const educationForm = document.getElementById(`education-form-${id}`);
     if (educationForm) {
       educationForm.remove();
+      console.log(`Removed education form #${id}`);
     }
   }
   
-  let experienceCount = 0;
-  function addExperience() {
-    experienceCount++;
-    const experienceContainer = document.getElementById("experienceContainer");
-    if (!experienceContainer) return;
-  
-    const experienceForm = document.createElement("div");
-    experienceForm.classList.add("experience-form");
-    experienceForm.id = `experience-form-${experienceCount}`;
-  
-    experienceForm.innerHTML = `
-      <div class="form-group">
-          <label for="jobTitle-${experienceCount}">Job Title:</label>
-          <input
-            type="text"
-            id="jobTitle-${experienceCount}"
-            name="jobTitle"
-            placeholder="Enter your job title"
-            required
-          >
-      </div>
-      <div class="form-group">
-          <label for="company-${experienceCount}">Company:</label>
-          <input
-            type="text"
-            id="company-${experienceCount}"
-            name="company"
-            placeholder="Enter company name"
-            required
-          >
-      </div>
-      <div class="form-group">
-          <label for="location-${experienceCount}">Location:</label>
-          <input
-            type="text"
-            id="location-${experienceCount}"
-            name="location"
-            placeholder="Enter job location"
-            required
-          >
-      </div>
-      <div class="form-group">
-          <label for="startDate-${experienceCount}">Start Date:</label>
-          <input
-            type="date"
-            id="startDate-${experienceCount}"
-            name="startDate"
-            required
-          >
-      </div>
-      <div class="form-group">
-          <label for="endDate-${experienceCount}">End Date:</label>
-          <input
-            type="date"
-            id="endDate-${experienceCount}"
-            name="endDate"
-          >
-      </div>
-      <div class="form-group">
-          <label for="roleDescription-${experienceCount}">Role Description:</label>
-          <textarea
-            id="roleDescription-${experienceCount}"
-            name="roleDescription"
-            placeholder="Describe your responsibilities"
-            rows="4"
-            required
-          ></textarea>
-      </div>
-      <button class="remove-btn" onclick="removeExperience(${experienceCount})">Remove Entry</button>
-    `;
-  
-    experienceContainer.appendChild(experienceForm);
+
+let experienceCount = 0;
+
+function addExperience() {
+  experienceCount++;
+
+  // Create a local copy so each form references a unique ID
+  const localCount = experienceCount;
+
+  const experienceContainer = document.getElementById("experienceContainer");
+  if (!experienceContainer) return;
+
+  const experienceForm = document.createElement("div");
+  experienceForm.classList.add("experience-form");
+  experienceForm.id = `experience-form-${localCount}`;
+
+  experienceForm.innerHTML = `
+    <div class="form-group">
+        <label for="jobTitle-${localCount}">Job Title:</label>
+        <input
+          type="text"
+          id="jobTitle-${localCount}"
+          name="jobTitle"
+          placeholder="Enter your job title"
+          required
+        >
+    </div>
+    <div class="form-group">
+        <label for="company-${localCount}">Company:</label>
+        <input
+          type="text"
+          id="company-${localCount}"
+          name="company"
+          placeholder="Enter company name"
+          required
+        >
+    </div>
+    <div class="form-group">
+        <label for="location-${localCount}">Location:</label>
+        <input
+          type="text"
+          id="location-${localCount}"
+          name="location"
+          placeholder="Enter job location"
+          required
+        >
+    </div>
+    <div class="form-group">
+        <label for="startDate-${localCount}">Start Date:</label>
+        <input
+          type="date"
+          id="startDate-${localCount}"
+          name="startDate"
+          required
+        >
+    </div>
+    <div class="form-group">
+        <label for="endDate-${localCount}">End Date:</label>
+        <input
+          type="date"
+          id="endDate-${localCount}"
+          name="endDate"
+        >
+    </div>
+    <div class="form-group">
+        <label for="roleDescription-${localCount}">Role Description:</label>
+        <textarea
+          id="roleDescription-${localCount}"
+          name="roleDescription"
+          placeholder="Describe your responsibilities"
+          rows="4"
+          required
+        ></textarea>
+    </div>
+    <!-- No inline onclick -->
+    <button class="remove-btn" type="button">Remove Entry</button>
+  `;
+
+  experienceContainer.appendChild(experienceForm);
+
+  // Use class or querySelector to find the new remove button
+  const removeButton = experienceForm.querySelector(".remove-btn");
+  // Attach an event listener referencing the unique localCount
+  removeButton.addEventListener("click", () => {
+    removeExperience(localCount);
+  });
+}
+
+// removeExperience references the ID created above
+function removeExperience(id) {
+  const experienceForm = document.getElementById(`experience-form-${id}`);
+  if (experienceForm) {
+    experienceForm.remove();
+    console.log(`Removed experience form #${id}`);
   }
-  
-  function removeExperience(id) {
-    const experienceForm = document.getElementById(`experience-form-${id}`);
-    if (experienceForm) {
-      experienceForm.remove();
-    }
-  }
-  
+}
+
   /************************************************
    * Auto Fill
    ************************************************/
