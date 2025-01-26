@@ -11,7 +11,9 @@ async function startFlowRun(prompt) {
     // Build pipeline inputs for this single question
     const pipelineInputs = [
       { input_name: "prompt", value: prompt },
-      { input_name: "context", value: "my name is daddy" }
+      { input_name: "context", value: "please give the correct answers to the prompts provided as they will be pasted raw into job application questions." +
+        "do not say Here is my response to the provided prompt. Do not say based on the provided profile. Just directly answer the question"
+       }
     ];
   
     const bodyData = {
