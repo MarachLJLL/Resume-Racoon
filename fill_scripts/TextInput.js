@@ -28,7 +28,7 @@ class TextInput {
             return 'province';
         } else if (/.*(postal|zip).*/.test(ct)) {
             return 'postalCode';
-        } else if (/.*address.*/.test(ct) && !/.*2.*/.test(ct)) {
+        } else if (/.*address.*/.test(ct) && !/.*e2.*/.test(ct)) {
             return 'address';
         } else if (/.*address.*/.test(ct)) {
             return 'address2';
@@ -44,7 +44,7 @@ class TextInput {
             return 'portfolio';
         } else if (/.*university.*name.*/.test(ct)) {
             return 'universityName';
-        } else if (/.*(?:expected.*gra|grad|graduation).*/.test(ct)) {
+        } else if (/.*graduat.*/.test(ct)) {
             return 'expectedGraduation';
         } else if (/.*(education|school|degree|uni|college|university).*/.test(ct)) {
             return 'education';
@@ -72,6 +72,8 @@ class TextInput {
         if (layer_up < 2) {
             ct = this.inputElement.parentElement.textContent.toLowerCase()
             return this._setClassification(ct, layer_up + 1)
+        } else {
+            // insert Isaac short answer API call here
         }
         
     }
@@ -240,7 +242,11 @@ fillText = async () => {
     });
 }
 
-let delay = 3000
+let delay = 5000
+if (document.querySelectorAll('[aria-label*="Country"]')) {
+    delay = 10000
+}
+
 if (/.*wd3.*/.test(window.location.href)) {
     setTimeout(fillText, delay)
 } else {
@@ -250,9 +256,9 @@ if (/.*wd3.*/.test(window.location.href)) {
 setTimeout(() => {
     let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]')
     nextButton.addEventListener('click', () => {
-    setTimeout(() => {
-        fillText();
-    }, delay);
-});
+        setTimeout(() => {
+            fillText();
+        }, 5000);
+    });
 }, delay)
 
