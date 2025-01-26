@@ -23,8 +23,17 @@
         {
             "matches": ["<all_urls>"],
             "js": [
-                "Profile.js",
-                "TextInput.js"  
+                "classes/Education.js",
+                "classes/WorkExperience.js",
+                "classes/Profile.js",
+                "fill_scripts/TextInput.js"  
+            ],
+            "all_frames": true
+        },
+        {
+            "matches": ["*://*.wd3.myworkdayjobs.com/*"],
+            "js": [
+                "fill_scripts/Workday.js"  
             ],
             "all_frames": true
         }
