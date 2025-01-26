@@ -19,6 +19,7 @@
         </div>
     </header>
 
+    <label for="linkedinProfile">LinkedIn:</label>
     <div class="linkedInTop">
         <div id="linkedinWrapper">
             <input 
@@ -43,228 +44,248 @@
         <button class="remove-resume-btn" id="removeResumeBtn" style="display: none;" onclick="removeResume()">Remove document</button>
     </div>
 
+    <div class="buttonBlock">
+        <button 
+            class="button-19"
+            id="gatherInfoBtn" 
+            role="button" 
+            disabled
+            onclick="gatherInformation()">
+            Gather information from Resume and LinkedIn
+        </button>
+    </div>
+    
+
     <div class="accordion" id="accordion1">
         <div class="accordion-header" onclick="toggleAccordion('accordion1', 'arrowClosedOutter', 'arrowDown')">
             <img id="arrowClosedOutter" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
-            <span>Information</span>
-            </div>
+            <span>Your Application Details</span>
+        </div>
         
+        <div class="accordion-content">
+            <!--- PERSONAL INFORMATION -->
+            <div class="accordion" id="accordion2">
+                <div class="accordion-header" onclick="toggleAccordion('accordion2', 'arrowClosedInner', 'arrowDown')">
+                <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <span>Personal Information</span>
+            </div>
             <div class="accordion-content">
-                <!--- PERSONAL INFORMATION -->
-                <div class="accordion" id="accordion2">
-                    <div class="accordion-header" onclick="toggleAccordion('accordion2', 'arrowClosedInner', 'arrowDown')">
-                    <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                    <span>Personal Information</span>
-                </div>
-                <div class="accordion-content">
-                    <form>
-                        <div class="form-group">
-                            <label for="firstName">First Name:</label>
-                            <input type="text" id="firstName">
-                        </div>
+                <form>
+                    <div class="form-group">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" id="firstName">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="lastName">Last Name:</label>
-                            <input type="text" id="lastName">
-                        </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" id="lastName">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="address">Address line 1:</label>
-                            <input type="text" id="address1">
-                        </div>
+                    <div class="form-group">
+                        <label for="address">Address line 1:</label>
+                        <input type="text" id="address1">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="address">Address line 2:</label>
-                            <input type="text" id="address2">
-                        </div>
+                    <div class="form-group">
+                        <label for="address">Address line 2:</label>
+                        <input type="text" id="address2">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="cityOfResidence">City of residence:</label>
-                            <input type="text" id="city">
-                        </div>
+                    <div class="form-group">
+                        <label for="cityOfResidence">City of residence:</label>
+                        <input type="text" id="city">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="province">Province:</label>
-                            <div class="select-wrapper">
-                                <select id="province" name="province">
-                                    <option value="" disabled selected>Select your province</option>
-                                    <option value="Alberta">Alberta</option>
-                                    <option value="British Columbia">British Columbia</option>
-                                    <option value="Manitoba">Manitoba</option>
-                                    <option value="New Brunswick">New Brunswick</option>
-                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                                    <option value="Nova Scotia">Nova Scotia</option>
-                                    <option value="Ontario">Ontario</option>
-                                    <option value="Prince Edward Island">Prince Edward Island</option>
-                                    <option value="Quebec">Quebec</option>
-                                    <option value="Saskatchewan">Saskatchewan</option>
-                                    <option value="Northwest Territories">Northwest Territories</option>
-                                    <option value="Nunavut">Nunavut</option>
-                                    <option value="Yukon">Yukon</option>
-                                </select>
-                            </div>
+                    <div class="form-group">
+                        <label for="province">Province:</label>
+                        <div class="select-wrapper">
+                            <select id="province" name="province">
+                                <option value="" disabled selected>Select your province</option>
+                                <option value="Alberta">Alberta</option>
+                                <option value="British Columbia">British Columbia</option>
+                                <option value="Manitoba">Manitoba</option>
+                                <option value="New Brunswick">New Brunswick</option>
+                                <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                <option value="Nova Scotia">Nova Scotia</option>
+                                <option value="Ontario">Ontario</option>
+                                <option value="Prince Edward Island">Prince Edward Island</option>
+                                <option value="Quebec">Quebec</option>
+                                <option value="Saskatchewan">Saskatchewan</option>
+                                <option value="Northwest Territories">Northwest Territories</option>
+                                <option value="Nunavut">Nunavut</option>
+                                <option value="Yukon">Yukon</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="postal">Postal Code:</label>
-                            <input type="text" id="postalCode">
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="postal">Postal Code:</label>
+                        <input type="text" id="postalCode">
+                    </div>
+                </form>
+            </div>
 
-                <!--- CONTACT -->
-                <div class="accordion" id="accordion3">
-                    <div class="accordion-header" onclick="toggleAccordion('accordion3', 'arrowClosed3', 'arrowDown')">
-                    <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                    <span>Contact</span>
-                </div>
-                <div class="accordion-content">
-                    <form>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="text" id="email">
-                        </div>
+            <!--- CONTACT -->
+            <div class="accordion" id="accordion3">
+                <div class="accordion-header" onclick="toggleAccordion('accordion3', 'arrowClosed3', 'arrowDown')">
+                <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <span>Contact</span>
+            </div>
+            <div class="accordion-content">
+                <form>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="text" id="email">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="phoneNumber">Phone number:</label>
-                            <input type="text" id="phoneNumber">
-                        </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone number:</label>
+                        <input type="text" id="phoneNumber">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="linked">LinkedIn:</label>
-                            <input type="text" id="linkedinProfile">
-                        </div>
+                    <div class="form-group">
+                        <label for="linked">LinkedIn:</label>
+                        <input type="text" id="linkedinProfile">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="website">Website:</label>
-                            <input type="text" id="website">
-                        </div>
+                    <div class="form-group">
+                        <label for="website">Website:</label>
+                        <input type="text" id="website">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="github">Github:</label>
-                            <input type="text" id="githubProfile">
-                        </div>
+                    <div class="form-group">
+                        <label for="github">Github:</label>
+                        <input type="text" id="githubProfile">
+                    </div>
 
-                        <div class="form-group">
-                            <label for="portfolio">Portfolio link:</label>
-                            <input type="text" id="portfolio">
-                        </div>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="portfolio">Portfolio link:</label>
+                        <input type="text" id="portfolio">
+                    </div>
+                </form>
+            </div>
                 
-                <!-- EDUCATION -->
-                <div class="accordion" id="accordion4">
-                    <div class="accordion-header" onclick="toggleAccordion('accordion4', 'arrowClosed4', 'arrowDown')">
-                    <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                    <span>Education</span>
-                </div>
-                <div class="accordion-content">
-                    <div id="educationContainer"></div>
-                    <button class="add-education-btn" onclick="addEducation()">Add Education</button>
-                </div>
+            <!-- EDUCATION -->
+            <div class="accordion" id="accordion4">
+                <div class="accordion-header" onclick="toggleAccordion('accordion4', 'arrowClosed4', 'arrowDown')">
+                <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <span>Education</span>
+            </div>
+            <div class="accordion-content">
+                <div id="educationContainer"></div>
+                <button class="add-education-btn" onclick="addEducation()">Add Education</button>
+            </div>
 
-                <!-- EXPERIENCE -->
-                <div class="accordion" id="accordion5">
-                    <div class="accordion-header" onclick="toggleAccordion('accordion5', 'arrowClosed5', 'arrowDown')">
-                    <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                    <span>Experience</span>
-                </div>
-                <div class="accordion-content">
-                    <div id="experienceContainer"></div>
-                    <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
-                </div>
-                
-                <!-- LEGAL -->
-                <div class="accordion" id="accordion6">
-                    <div class="accordion-header" onclick="toggleAccordion('accordion6', 'arrowClosed6', 'arrowDown')">
-                    <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                    <span>Legal</span>
-                </div>
-                <div class="accordion-content">
-                    <form>
-                        <div class="form-group">
-                            <label for="province">Gender:</label>
-                            <div class="select-wrapper">
-                                <select id="gender" name="gender">
-                                    <option value="" disabled selected>Select your gender</option>
-                                    <option value="female">Female</option>
-                                    <option value="male">Male</option>
-                                    <option value="other">Other</option>
-                                    <option value="doNotIdentify">I don't wish to answer</option>
-                                </select>
-                            </div>
+            <!-- EXPERIENCE -->
+            <div class="accordion" id="accordion5">
+                <div class="accordion-header" onclick="toggleAccordion('accordion5', 'arrowClosed5', 'arrowDown')">
+                <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <span>Experience</span>
+            </div>
+            <div class="accordion-content">
+                <div id="experienceContainer"></div>
+                <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
+            </div>
+            
+            <!-- LEGAL -->
+            <div class="accordion" id="accordion6">
+                <div class="accordion-header" onclick="toggleAccordion('accordion6', 'arrowClosed6', 'arrowDown')">
+                <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                <span>Legal</span>
+            </div>
+            <div class="accordion-content">
+                <form>
+                    <div class="form-group">
+                        <label for="province">Gender:</label>
+                        <div class="select-wrapper">
+                            <select id="gender" name="gender">
+                                <option value="" disabled selected>Select your gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                                <option value="other">Other</option>
+                                <option value="doNotIdentify">I don't wish to answer</option>
+                            </select>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="nonCompeteDisclosure">Have you signed a non-compete that will affect your employment for this firm?</label>
-                            <div class="radio-group">
-                                <label for="nonCompeteDisclosure">
-                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="yes"> Yes
-                                </label>
-                                <label for="nonCompeteDisclosure">
-                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="no"> No
-                                </label>
-                            </div>
+                    <div class="form-group">
+                        <label for="nonCompeteDisclosure">Have you signed a non-compete that will affect your employment for this firm?</label>
+                        <div class="radio-group">
+                            <label for="nonCompeteDisclosure">
+                                <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="yes"> Yes
+                            </label>
+                            <label for="nonCompeteDisclosure">
+                                <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="no"> No
+                            </label>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="veteran">Are you a protected veteran?</label>
-                            <div class="radio-group">
-                                <label for="veteran">
-                                    <input type="radio" id="veteran" name="veteran" value="yes"> Yes
-                                </label>
-                                <label for="veteran">
-                                    <input type="radio" id="veteran" name="veteran" value="no"> No
-                                </label>
-                            </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="veteran">Are you a protected veteran?</label>
+                        <div class="radio-group">
+                            <label for="veteran">
+                                <input type="radio" id="veteran" name="veteran" value="yes"> Yes
+                            </label>
+                            <label for="veteran">
+                                <input type="radio" id="veteran" name="veteran" value="no"> No
+                            </label>
                         </div>
-                        
-                        <div class="form-group">
-                            <label for="authorizedToWork">Are you legally eligible to work where this job is located?</label>
-                            <div class="radio-group">
-                                <label for="authorizedToWork">
-                                    <input type="radio" id="authorizedToWork" name="legal" value="yes"> Yes
-                                </label>
-                                <label for="authorizedToWork">
-                                    <input type="radio" id="authorizedToWork" name="legal" value="no"> No
-                                </label>
-                            </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="authorizedToWork">Are you legally eligible to work where this job is located?</label>
+                        <div class="radio-group">
+                            <label for="authorizedToWork">
+                                <input type="radio" id="authorizedToWork" name="legal" value="yes"> Yes
+                            </label>
+                            <label for="authorizedToWork">
+                                <input type="radio" id="authorizedToWork" name="legal" value="no"> No
+                            </label>
                         </div>
+                    </div>
 
-                        <div class="form-group">
-                            <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
-                            <div class="radio-group">
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
-                                </label>
-                                <label for="sponsorship">
-                                    <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
-                                </label>
-                            </div>
+                    <div class="form-group">
+                        <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
+                        <div class="radio-group">
+                            <label for="sponsorship">
+                                <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
+                            </label>
+                            <label for="sponsorship">
+                                <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
+                            </label>
                         </div>
+                    </div>
 
 
-                        <div class="form-group">
-                            <label for="disability">Are you a person with a disability?</label>
-                            <div class="radio-group">
-                                <label for="disability">
-                                    <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
-                                </label>
-                                <label for="sponsorship">
-                                    <input type="radio" id="disability-no" name="disability" value="no"> No
-                                </label>
-                            </div>
+                    <div class="form-group">
+                        <label for="disability">Are you a person with a disability?</label>
+                        <div class="radio-group">
+                            <label for="disability">
+                                <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
+                            </label>
+                            <label for="sponsorship">
+                                <input type="radio" id="disability-no" name="disability" value="no"> No
+                            </label>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+            </div>
             </div>
         </div>
 
         <div class="buttonBlock">
             <button class="button-19" role="button">Save</button>
         </div>
+    </div>
+
+    <div class="accordion" id="accordion7">
+        <div class="accordion-header" onclick="toggleAccordion('accordion7', 'arrowClosed7', 'arrowDown')">
+            <img id="arrowClosed7" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
+            <span>Generate coversheet</span>
+            </div>
         
     </div>
+
 
 
     <script>
@@ -404,10 +425,15 @@
             const fileName = document.getElementById('fileName');
             const removeResumeBtn = document.getElementById('removeResumeBtn');
 
+            // Clear file input and update UI
             fileInput.value = '';
             fileName.textContent = 'Upload resume';
             removeResumeBtn.style.display = 'none';
+
+            // Recheck the conditions for enabling the button
+            updateGatherInfoButton();
         }
+
 
         function handleLinkedInEnter(event) {
             if (event.key === "Enter") {
@@ -453,6 +479,30 @@
                 image.src = `https://cdn.discordapp.com/attachments/1330221441677004876/1332823068585885726/caret-down-svgrepo-com.png?ex=6796a7b6&is=67955636&hm=2bda584bab2aab37b0d885c9127ba90873876d82a83628058101556cc4bf0c44&`; // Replace with second image URL
             }
         }
+
+        function updateGatherInfoButton() {
+            const linkedinInput = document.getElementById("linkedinProfile").value.trim();
+            const fileUploaded = document.getElementById("fileUpload").files.length > 0;
+            const gatherInfoBtn = document.getElementById("gatherInfoBtn");
+
+            if (linkedinInput && fileUploaded) {
+                gatherInfoBtn.disabled = false;
+                gatherInfoBtn.style.opacity = "1"; 
+                gatherInfoBtn.style.cursor = "pointer";
+            } else {
+                gatherInfoBtn.disabled = true;
+                gatherInfoBtn.style.opacity = "0.5"; 
+                gatherInfoBtn.style.cursor = "not-allowed";
+            }
+        }
+
+        document.getElementById("linkedinProfile").addEventListener("input", updateGatherInfoButton);
+        document.getElementById("fileUpload").addEventListener("change", updateGatherInfoButton);
+
+        function gatherInformation() {
+            alert("Gathering information from LinkedIn and Resume!");
+        }
+
     </script>
 </body>
 </html>
