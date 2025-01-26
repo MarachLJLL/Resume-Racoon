@@ -262,3 +262,38 @@ setTimeout(() => {
     });
 }, delay)
 
+async function getProfile() {
+    try {
+        const result = await new Promise((resolve, reject) => {
+            chrome.storage.local.get(["profile"], (result) => {
+                if (chrome.runtime.lastError) {
+                    reject(chrome.runtime.lastError);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+
+        if (result.profile) {
+            const p = result.profile;
+            console.log("Profile:", p);
+            return p; // Return the profile if needed
+        } else {
+            console.log("No profile found.");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error getting profile:", error);
+    }
+}
+
+// Example usage
+(async () => {
+    const profile = await getProfile();
+    console.log("Fetched Profile:", profile);
+})();
+
+
+
+
+
