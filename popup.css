@@ -26,75 +26,260 @@ header{
 }
 
 .accordion {
-    background-color: #DDD0BC;
-    cursor: pointer;
-    padding: 18px;
-    font-size: 25px;
-    width: calc(100% - 20px);
-    text-align: left;
-    border: none;
-    outline: none;
-    font-family: "Albert Sans", serif;
-    font-weight: bold;
-    color: #4E4138;
-    border-radius: 10px;
-    margin-left: 10px;
-    display: flex;
-    align-items: center;
-  }
-  
-.active, .accordion:hover {
-    background-color: #e9d4b6;
-}
-  
-.accordion.active {
-    border-radius: 10px 10px 0 0;
-}
-
-.accordion svg {
-    width: 50px;
-    height: 50px;
-    padding: 0px;
-}
-
-.informationOptions {
-    padding: 0 18px;
-    background-color:#e9d4b6;
-    border-radius: 0 0 10px 10px;
-    display: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
     overflow: hidden;
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.accordionMini{
-    background-color: #e9d4b6;
-    cursor: pointer;
-    padding: 18px;
-    font-size: 20px;
-    width: calc(100% - 20px);
-    text-align: left;
-    border: none;
-    outline: none;
-    font-family: "Albert Sans", serif;
-    font-weight: bold;
-    color: #4E4138;
-    border-radius: 10px;
-    margin-left: 10px;
+.accordion-header {
     display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(242, 238, 234);
+    font-size: 23px;
+    font-weight: bold;
+}
+
+  .accordion-header img {
+    width: 30px;
+    height: 30px;
+    margin-right: 5px;
+  }
+
+  .accordion-content {
+    display: none;
+    padding: 10px;
+    background-color: rgb(242, 238, 234);
+  }
+
+  .form-group {
+    margin-bottom: 10px;
+    margin-right: 0px;
+  }
+
+  .form-group label {
+    display: flex;
+    margin-bottom: 5px;
+  }
+
+.form-group input {
+    width: 95%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    background-color: white;
+    border: none;
+}
+
+.button-19 {
+  appearance: button;
+  background-color: #efaa89;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  box-sizing: border-box;
+  color: #4E4138;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  text-align: center;
+  touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 20%;
+}
+
+.button-19:after {
+  background-clip: padding-box;
+  background-color: #f0b598;
+  border: solid transparent;
+  border-radius: 16px;
+  border-width: 0 0 4px;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.button-19, .button-19:focus {
+  user-select: auto;
+}
+
+.button-19:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.button-19:disabled {
+  cursor: auto;
+}
+
+.button-19:active {
+  border-width: 4px 0 0;
+  background: none;
+}
+
+.buttonBlock{
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-.accordionMini svg{
-    width: 40px;
-    height: 40px;
-    padding: 0px;
-}
-
-.active, .accordionMini:hover {
-    background-color: #e9d4b6;
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-left: 10px;
 }
   
-.accordionMini.active {
-    border-radius: 10px 10px 0 0;
+.upload-label {
+    display: flex;
+    border: 2px dashed #f0b598;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
+  
+.upload-label:hover {
+    border-color: #666;
+}
+  
+.upload-input {
+    display: none;
+}
+  
+#fileName {
+    color: #4E4138;
+    font-size: 16px;
+    text-align: center;
+}
+
+#accordion3, #accordion4, #accordion5, #accordion6 {
+    margin: 0;
+    padding: 0;
+}
+
+select {
+    width: 100%; 
+    padding: 10px; 
+    border-radius: 10px; 
+    background-color: white;
+    font-size: 16px; 
+    color: #4E4138; 
+    border: none; 
+    appearance: none; 
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
+    position: relative; 
+    margin-bottom: 10px;
+}
+
+select::after {
+    content: ''; /* Remove native arrow */
+}
+
+.select-wrapper {
+    position: relative; /* Needed for custom arrow positioning */
+    display: flex;
+    align-items: center;
+    width: 100%; /* Match parent width */
+}
+
+.select-wrapper::after {
+    content: '▼'; /* Add custom arrow */
+    font-size: 14px;
+    color: #4E4138; /* Match dropdown text color */
+    position: absolute;
+    right: 15px; /* Position to the right */
+    pointer-events: none; /* Ensure it doesn't interfere with dropdown functionality */
+}
+
+.radio-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #4E4138;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.radio-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+education-form {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input, select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+button.add-education-btn, button.submit-education-btn, .remove-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f0b598;
+    color: white;
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button.submit-education-btn {
+    background-color: #2196F3;
+}
+
+.remove-btn {
+    background-color: #e5766e;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
