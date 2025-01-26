@@ -307,7 +307,7 @@
         <div class="accordion-header" onclick="toggleAccordion('accordion7', 'arrowClosed7', 'arrowClosed7')">
             <img id="arrowClosed7" src="https://cdn.discordapp.com/attachments/1332823197543829606/1332979659754704937/caret-right-svgrepo-com.png?ex=6797398c&is=6795e80c&hm=38ed4517c73ab7f9889c7fd8445f01c4b127d7b17938138e95205edb42011eff&">
             <span id="generateFeature" style="opacity: 0.5; cursor: not-allowed; color: #aca6a6;">
-                Generate cover letter + Track job with spreadsheet
+                Generate cover letter + Track job with spreadsheet + Interview preparation questions
             </span>
         </div>
 
@@ -325,12 +325,62 @@
                 <button id="addJobBtn" class="button-19" onclick="generateCoversheet()" disabled>Add job to spreadsheet  📊</button>
             </div>
         </div>
-
     </div>
 
-
+    <div class="autofill-box">
+        <div style="width:10%;height:0;padding-bottom:10%; padding-right: 30px;position:relative;"><iframe src="https://giphy.com/embed/pIIqPCqcCJidJFes95" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p></p>
+        <button class="autofill-button" onclick="autoFill()">Auto-Fill 🔥</button>
+    </div>
 
     <script>
+        document.getElementById("jobProfile").addEventListener("input", () => {
+            const jobInput = document.getElementById("jobProfile").value.trim();
+            const generateCoversheetBtn = document.getElementById("generateCoversheetBtn");
+
+            if (jobInput) {
+                generateCoversheetBtn.disabled = false;
+                generateCoversheetBtn.style.opacity = "1"; // Normal opacity
+                generateCoversheetBtn.style.cursor = "pointer"; // Allow clicking
+            } else {
+                generateCoversheetBtn.disabled = true;
+                generateCoversheetBtn.style.opacity = "0.5"; // Faded appearance
+                generateCoversheetBtn.style.cursor = "not-allowed"; // Prevent clicking
+            }
+        });
+
+        function updateButtonStates() {
+            const jobInput = document.getElementById("jobProfile").value.trim();
+            const googleSheetInput = document.getElementById("googleSheetLink").value.trim();
+            const generateCoversheetBtn = document.getElementById("generateCoversheetBtn");
+            const addJobBtn = document.getElementById("addJobBtn");
+
+            // Enable or disable Generate Cover Sheet button
+            if (jobInput) {
+                generateCoversheetBtn.disabled = false;
+                generateCoversheetBtn.style.opacity = "1";
+                generateCoversheetBtn.style.cursor = "pointer";
+            } else {
+                generateCoversheetBtn.disabled = true;
+                generateCoversheetBtn.style.opacity = "0.5";
+                generateCoversheetBtn.style.cursor = "not-allowed";
+            }
+
+            // Enable or disable Add Job button
+            if (jobInput && googleSheetInput) {
+                addJobBtn.disabled = false;
+                addJobBtn.style.opacity = "1";
+                addJobBtn.style.cursor = "pointer";
+            } else {
+                addJobBtn.disabled = true;
+                addJobBtn.style.opacity = "0.5";
+                addJobBtn.style.cursor = "not-allowed";
+            }
+        }
+
+        document.getElementById("jobProfile").addEventListener("input", updateButtonStates);
+        document.getElementById("googleSheetLink").addEventListener("input", updateButtonStates);
+
+
         function enableGenerateButton() {
             const googleSheetInput = document.getElementById("googleSheetLink").value.trim();
             const generateButton = document.getElementById("addJobBtn");

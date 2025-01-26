@@ -77,14 +77,14 @@ header{
   appearance: button;
   background-color: #efaa89;
   border: solid transparent;
-  border-radius: 10px;
+  border-radius: 25px;
   border-width: 0 0 4px;
   box-sizing: border-box;
-  color: #4E4138;
+  color: white;
   cursor: pointer;
   display: inline-block;
   font-size: 15px;
-  font-weight: 500;
+  font-weight: bold;
   margin: 0;
   outline: none;
   overflow: visible;
@@ -103,9 +103,9 @@ header{
 
 .button-19:after {
   background-clip: padding-box;
-  background-color: #f0b598;
+  background: linear-gradient(90deg, #ff8c00, #ff4500);
   border: solid transparent;
-  border-radius: 10px;
+  border-radius: 25px;
   border-width: 0 0 4px;
   bottom: -4px;
   content: "";
@@ -136,7 +136,7 @@ header{
 
 .buttonBlock{
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-items: center;
     margin-left: 10px;
 }
@@ -409,7 +409,7 @@ label[for="jobDescriptionURL"]{
 
 
 #addJobBtn, #generateCoversheetBtn {
-    width: 200px;
+    width: 225px;
 }
 
 
@@ -424,3 +424,40 @@ label[for="jobDescriptionURL"]{
     -webkit-filter: brightness(1.1);
 }
 
+.autofill-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px; /* Add spacing between the GIF and button */
+    margin: 20px 10px;
+}
+
+.autofill-box iframe {
+    flex-shrink: 0; /* Ensure the GIF doesn't resize */
+}
+
+.autofill-button {
+    background: linear-gradient(90deg, #ff8c00, #ff4500);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(255, 69, 0, 0.6);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+
+#generateCoversheetBtn:disabled {
+    background-color: #ccc; /* Light gray for disabled */
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#generateCoversheetBtn:not(:disabled):hover {
+    filter: brightness(1.1);
+    -webkit-filter: brightness(1.1);
+}
