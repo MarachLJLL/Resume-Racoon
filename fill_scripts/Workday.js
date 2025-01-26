@@ -65,8 +65,9 @@ setTimeout(() => {
     })()
 }, 10000);
 
+
 // For the popup selector, it's always the last element after clicking the button
-document.querySelectorAll('[tabindex="-1"]');
+// document.querySelectorAll('[tabindex="-1"]');
 
 
 

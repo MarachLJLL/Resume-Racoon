@@ -32,6 +32,7 @@
         {
             "matches": ["*://*.wd3.myworkdayjobs.com/*"],
             "js": [
+                "fill_scripts/AddJobs.js",
                 "fill_scripts/Workday.js"  
             ],
             "all_frames": true

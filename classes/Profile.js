@@ -38,32 +38,11 @@ class Profile {
     }
 }
 
-class WorkExperience {
-    constructor() {
-        this.jobTitle = "";
-        this.company = "";
-        this.location = "";
-        this.startDate = ""; // Format: "MM/YYYY"
-        this.endDate = "";   // Format: "MM/YYYY"
-        this.roleDescription = "";
-    }
-}
-
-class Education {
-    constructor() {
-        this.university = "";
-        this.degree = "";          // e.g., "Bachelor of Software Engineering"
-        this.fieldOfStudy = "";    // e.g., "Applied Artificial Intelligence"
-        this.gpa = "";
-        this.startDate = "";       // Format: "MM/YYYY"
-        this.endDate = "";         // Format: "MM/YYYY"
-    }
-}
-
 /**
- * Converts a date string like "Sep. 2019" to "09/2019".
+ * Converts a date string like "Sep. 2019" to "09/01/2019".
+ * Sets the day to "01" if not present.
  * @param {string} dateStr - The date string to format.
- * @returns {string} - The formatted date string in MM/YYYY format.
+ * @returns {string} - The formatted date string in MM/DD/YYYY format.
  */
 function formatDate(dateStr) {
     if (!dateStr) return "";
@@ -84,17 +63,18 @@ function formatDate(dateStr) {
         'dec': '12'
     };
 
-    // Regular expression to extract month and year
-    const regex = /([A-Za-z]{3})\.?\s+(\d{4})/;
+    // Regular expression to extract month, optional day, and year
+    const regex = /([A-Za-z]{3})\.?(?:\s+(\d{1,2}))?\s+(\d{4})/;
     const match = dateStr.match(regex);
 
     if (match) {
         let monthAbbr = match[1].toLowerCase();
-        let year = match[2];
+        let day = match[2] ? match[2].padStart(2, '0') : '01'; // Default to '01' if day not present
+        let year = match[3];
         let month = monthMap[monthAbbr];
 
         if (month) {
-            return `${month}/${year}`;
+            return `${month}/${day}/${year}`;
         }
     }
 
@@ -118,6 +98,11 @@ function formatPhoneNumber(phoneStr) {
     return digitsOnly;
 }
 
+/**
+ * Constructs a Profile instance from the provided API data.
+ * @param {Object} apiData - The API response object containing resume data.
+ * @returns {Profile} - The constructed Profile instance.
+ */
 function constructProfile(apiData) {
     const profile = new Profile();
 
@@ -201,39 +186,40 @@ function constructProfile(apiData) {
     return profile;
 }
 
-// // Example usage:
-// const apiData = {
-//     "addressline1": ["<UNKNOWN>"],
-//     "addressline2": ["<UNKNOWN>"],
-//     "city": ["Montreal"],
-//     "degreeenddate": [["May 2022", "May 2022"]],
-//     "degreestartdate": [["Sep. 2019", "Sep. 2019"]],
-//     "email": ["tianzhen.shao@mail.mcgill.ca"],
-//     "fieldofstudy": [["Bachelor of Software Engineering, Minor in Applied Artificial Intelligence", "High School Diploma"]],
-//     "firstname": ["Jason"],
-//     "github": ["<UNKNOWN>"],
-//     "gpa": [["<UNKNOWN>", "<UNKNOWN>"]],
-//     "jobcompany": [["Airbus Canada", "Langying Education", "Jaguar Land Rover"]],
-//     "jobenddate": [["May 2027", "Aug 2021", "Aug 2023"]],
-//     "joblocation": [["Montreal, QC", "Shanghai, China", "Shanghai, China"]],
-//     "jobroledescription": [["Proposed and Integrated 20+ solutions for data tracker tool using Google Apps Script to eliminate stale data and automate the certification processes, overall enhancing workflow efficiency to save up to 30+ hours per week. Developed 5+ dashboards by querying data from SQL databases and Excel, integrating it into QlikSense to visualize real-time certification process data and provide data-driven recommendations for product improvement.",
-//         "Developed the teacher-student interaction software using JavaScript, HTML/CSS, and VUE.js framework to beautify and improve the user experience.",
-//         "Assisted in the development and execution of procurement strategies, negotiated with suppliers to optimize cost savings and efficiency, and actively engaged in workshops, such as AWS cloud services."
-//     ]],
-//     "jobstartdate": [["Sep. 2022", "Jun. 2021", "May 2023"]],
-//     "jobtitle": [["Software Development Intern", "Front-end Developer Intern", "Purchasing Intern"]],
-//     "lastname": ["Shao"],
-//     "linkedin": ["linkedin.com/in/jason-shao"],
-//     "phonenumber": ["438-370-9345"],
-//     "portfolio": ["jasonshaoportfolio.com"],
-//     "postalcode": ["<UNKNOWN>"],
-//     "province": ["QC"],
-//     "university": [["McGill University", "Stanstead College"]],
-//     "website": ["jasonshaoportfolio.com"]
-// };
+// Example usage:
+const apiData = {
+    "addressline1": ["<UNKNOWN>"],
+    "addressline2": ["<UNKNOWN>"],
+    "city": ["Montreal"],
+    "degreeenddate": [["May 2022", "May 2022"]],
+    "degreestartdate": [["Sep. 2019", "Sep. 2019"]],
+    "email": ["tianzhen.shao@mail.mcgill.ca"],
+    "fieldofstudy": [["Bachelor of Software Engineering, Minor in Applied Artificial Intelligence", "High School Diploma"]],
+    "firstname": ["Jason"],
+    "github": ["<UNKNOWN>"],
+    "gpa": [["<UNKNOWN>", "<UNKNOWN>"]],
+    "jobcompany": [["Airbus Canada", "Langying Education", "Jaguar Land Rover"]],
+    "jobenddate": [["May 2027", "Aug 2021", "Aug 2023"]],
+    "joblocation": [["Montreal, QC", "Shanghai, China", "Shanghai, China"]],
+    "jobroledescription": [["Proposed and Integrated 20+ solutions for data tracker tool using Google Apps Script to eliminate stale data and automate the certification processes, overall enhancing workflow efficiency to save up to 30+ hours per week. Developed 5+ dashboards by querying data from SQL databases and Excel, integrating it into QlikSense to visualize real-time certification process data and provide data-driven recommendations for product improvement.",
+        "Developed the teacher-student interaction software using JavaScript, HTML/CSS, and VUE.js framework to beautify and improve the user experience.",
+        "Assisted in the development and execution of procurement strategies, negotiated with suppliers to optimize cost savings and efficiency, and actively engaged in workshops, such as AWS cloud services."
+    ]],
+    "jobstartdate": [["Sep. 2022", "Jun. 2021", "May 2023"]],
+    "jobtitle": [["Software Development Intern", "Front-end Developer Intern", "Purchasing Intern"]],
+    "lastname": ["Shao"],
+    "linkedin": ["linkedin.com/in/jason-shao"],
+    "phonenumber": ["438-370-9345"],
+    "portfolio": ["jasonshaoportfolio.com"],
+    "postalcode": ["<UNKNOWN>"],
+    "province": ["QC"],
+    "university": [["McGill University", "Stanstead College"]],
+    "website": ["jasonshaoportfolio.com"]
+};
 
 // Construct the Profile instance
 const userProfile = constructProfile(apiData);
+let p = userProfile;
 
 // Log the Profile to verify
 console.log(userProfile);

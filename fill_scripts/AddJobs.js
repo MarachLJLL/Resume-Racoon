@@ -2,6 +2,7 @@ var firstMatch = null;
 let clickCount = 0; 
 let index = 0;
 let monthIndex = 0;
+let workExperience = p.workExperience
 
 const today = new Date();
 const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-based
@@ -30,7 +31,7 @@ function getButtons() {
 
 // 2. Click the found button up to 5 times, filling the first "jobTitle" div after each click
 function clickButtonWithDelay() {
-  if (clickCount < 5 && firstMatch !== null) {
+  if (clickCount < p.workExperience.length && firstMatch !== null) {
     // Click the button
     firstMatch.click();
     clickCount++;
@@ -60,10 +61,13 @@ function fillFirstJobTitle() {
 
   let testStartDate = "01/22/2024";
   let testEndDate = "01/26/2025";
-  const startDate = new Date(testStartDate);
-  const endDate = new Date(testEndDate);
+  let startDate = new Date(testStartDate);
+  let endDate = new Date(testEndDate);
 
   if (jobTitleDivs.length > 0) {
+    console.log('index' + index)
+    startDate = new Date(workExperience[index].startDate)
+    endDate = new Date(workExperience[index].endDate)
     const firstJob = jobTitleDivs[index];
     const firstCompany = companyDivs[index];
     const firstLocation = locationDivs[index];
@@ -88,6 +92,7 @@ function fillFirstJobTitle() {
     const firstDescription = descriptionDiv[index];
     
     if (currentDate >= startDate && currentDate <= endDate) {
+      console.log('indexInIf' + index)
         firstCur.click();
         monthIndex += 1;
       } else {
@@ -145,17 +150,18 @@ function fillFirstJobTitle() {
     startYearMonth.dispatchEvent(new Event('input',  { bubbles: true }));
     startYearMonth.dispatchEvent(new Event('keyup',  { bubbles: true }));
     startYearMonth.dispatchEvent(new Event('change', { bubbles: true }));
-    index++;
 
-    firstJob.value = "Auto-filled job title";
+
+    firstJob.value = workExperience[index].jobTitle;
     firstCompany.focus();
-    firstCompany.value = "company";
+    firstCompany.value = workExperience[index].company;
     firstCompany.dispatchEvent(new Event('input',  { bubbles: true }));
     firstCompany.dispatchEvent(new Event('keyup',  { bubbles: true }));
     firstCompany.dispatchEvent(new Event('change', { bubbles: true }));
         
-    firstLocation.value = "location";
-    firstDescription.value = "description";
+    firstLocation.value = workExperience[index].location;
+    firstDescription.value = workExperience[index].roleDescription;
+    index++;
   } else {
     console.log("No jobTitle div found to fill.");
   }
@@ -178,3 +184,5 @@ setTimeout(() => {
   });
   console.log("Next button listener added.");
 }, 5000);
+
+console.log('loaded add jobs')
