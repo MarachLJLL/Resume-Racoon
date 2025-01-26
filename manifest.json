@@ -4,7 +4,7 @@
     "version": "1.0.0.0",
     "description": "Resume Racoon",
     "icons": {
-
+        "128": "icons/Untitled_Artwork 17.png"
     },
     "manifest_version": 3,
     "permissions": ["storage", "scripting", "activeTab", "downloads"],

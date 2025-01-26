@@ -188,15 +188,15 @@ function constructProfile(apiData) {
 
 // Example usage:
 const apiData = {
-    "addressline1": ["<UNKNOWN>"],
-    "addressline2": ["<UNKNOWN>"],
+    "addressline1": ["845 Sherbrooke Street"],
+    "addressline2": ["14"],
     "city": ["Montreal"],
     "degreeenddate": [["May 2022", "May 2022"]],
     "degreestartdate": [["Sep. 2019", "Sep. 2019"]],
     "email": ["tianzhen.shao@mail.mcgill.ca"],
     "fieldofstudy": [["Bachelor of Software Engineering, Minor in Applied Artificial Intelligence", "High School Diploma"]],
     "firstname": ["Jason"],
-    "github": ["<UNKNOWN>"],
+    "github": ["https://github.com/ihu04"],
     "gpa": [["<UNKNOWN>", "<UNKNOWN>"]],
     "jobcompany": [["Airbus Canada", "Langying Education", "Jaguar Land Rover"]],
     "jobenddate": [["May 2027", "Aug 2021", "Aug 2023"]],
@@ -208,7 +208,7 @@ const apiData = {
     "jobstartdate": [["Sep. 2022", "Jun. 2021", "May 2023"]],
     "jobtitle": [["Software Development Intern", "Front-end Developer Intern", "Purchasing Intern"]],
     "lastname": ["Shao"],
-    "linkedin": ["linkedin.com/in/jason-shao"],
+    "linkedin": ["https://www.linkedin.com/in/jason-shao-751686189/"],
     "phonenumber": ["438-370-9345"],
     "portfolio": ["jasonshaoportfolio.com"],
     "postalcode": ["<UNKNOWN>"],
