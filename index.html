@@ -19,40 +19,48 @@
         </div>
     </header>
 
-    <label for="linkedinProfile">LinkedIn:</label>
-    <div class="linkedInTop">
-        <div id="linkedinWrapper">
-            <input 
-                type="text" 
-                id="linkedinProfile" 
-                placeholder="Enter your LinkedIn URL"
-                onkeypress="handleLinkedInEnter(event)" 
-            />
-            <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
+    <div class="accordion" id="accordion">
+        <div class="accordion-header" onclick="toggleAccordion('accordion', 'arrowClosed0', 'arrowDown')">
+            <img id="arrowClosed0" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
+            <span>Smart Setup</span>
         </div>
-    </div>
-    
-   
-    <div class="upload-container">
-        <label for="fileUpload" class="upload-label">
-            <span id="fileName">Upload resume</span>
-            <input type="file" id="fileUpload" class="upload-input" onchange="handleFileUpload()" />
-        </label>
-    </div>
+        <div class="accordion-content">
+            <!--LINKED IN PART-->
+            <label for="linkedinProfile">Enter your LinkedIn account URL</label>
+            <div class="linkedInTop">
+                <div id="linkedinWrapper">
+                    <input 
+                        type="text" 
+                        id="linkedinProfile" 
+                        placeholder="LinkedIn URL"
+                        onkeypress="handleLinkedInEnter(event)" 
+                    />
+                    <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
+                </div>
+            </div>
+            
+            <div class="upload-container">
+                <label for="fileUpload" class="upload-label">
+                    <span id="fileName">Upload resume</span>
+                    <input type="file" id="fileUpload" class="upload-input" onchange="handleFileUpload()" />
+                </label>
+            </div>
 
-    <div class="remove-resume-container">
-        <button class="remove-resume-btn" id="removeResumeBtn" style="display: none;" onclick="removeResume()">Remove document</button>
-    </div>
+            <div class="remove-resume-container">
+                <button class="remove-resume-btn" id="removeResumeBtn" style="display: none;" onclick="removeResume()">Remove document</button>
+            </div>
 
-    <div class="buttonBlock">
-        <button 
-            class="button-19"
-            id="gatherInfoBtn" 
-            role="button" 
-            disabled
-            onclick="gatherInformation()">
-            Gather information from Resume and LinkedIn
-        </button>
+            <div class="buttonBlock">
+                <button 
+                    class="button-19"
+                    id="gatherInfoBtn" 
+                    role="button" 
+                    disabled
+                    onclick="gatherInformation()">
+                    Gather information 🦝
+                </button>
+            </div>
+        </div>
     </div>
     
 
@@ -61,234 +69,346 @@
             <img id="arrowClosedOutter" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
             <span>Your Application Details</span>
         </div>
-        
+    
         <div class="accordion-content">
-            <!--- PERSONAL INFORMATION -->
+            <!-- PERSONAL INFORMATION -->
             <div class="accordion" id="accordion2">
                 <div class="accordion-header" onclick="toggleAccordion('accordion2', 'arrowClosedInner', 'arrowDown')">
-                <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                <span>Personal Information</span>
-            </div>
-            <div class="accordion-content">
-                <form>
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address line 1:</label>
-                        <input type="text" id="address1">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="address">Address line 2:</label>
-                        <input type="text" id="address2">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cityOfResidence">City of residence:</label>
-                        <input type="text" id="city">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="province">Province:</label>
-                        <div class="select-wrapper">
-                            <select id="province" name="province">
-                                <option value="" disabled selected>Select your province</option>
-                                <option value="Alberta">Alberta</option>
-                                <option value="British Columbia">British Columbia</option>
-                                <option value="Manitoba">Manitoba</option>
-                                <option value="New Brunswick">New Brunswick</option>
-                                <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
-                                <option value="Nova Scotia">Nova Scotia</option>
-                                <option value="Ontario">Ontario</option>
-                                <option value="Prince Edward Island">Prince Edward Island</option>
-                                <option value="Quebec">Quebec</option>
-                                <option value="Saskatchewan">Saskatchewan</option>
-                                <option value="Northwest Territories">Northwest Territories</option>
-                                <option value="Nunavut">Nunavut</option>
-                                <option value="Yukon">Yukon</option>
-                            </select>
+                    <img id="arrowClosedInner" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                    <span>Personal Information</span>
+                </div>
+                <div class="accordion-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="firstName">First Name:</label>
+                            <input type="text" id="firstName">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="postal">Postal Code:</label>
-                        <input type="text" id="postalCode">
-                    </div>
-                </form>
+    
+                        <div class="form-group">
+                            <label for="lastName">Last Name:</label>
+                            <input type="text" id="lastName">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="address">Address line 1:</label>
+                            <input type="text" id="address1">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="address">Address line 2:</label>
+                            <input type="text" id="address2">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="cityOfResidence">City of residence:</label>
+                            <input type="text" id="city">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="province">Province:</label>
+                            <div class="select-wrapper">
+                                <select id="province" name="province">
+                                    <option value="" disabled selected>Select your province</option>
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="New Brunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>
+                                    <option value="Northwest Territories">Northwest Territories</option>
+                                    <option value="Nunavut">Nunavut</option>
+                                    <option value="Yukon">Yukon</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="postal">Postal Code:</label>
+                            <input type="text" id="postalCode">
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <!--- CONTACT -->
+    
+            <!-- CONTACT -->
             <div class="accordion" id="accordion3">
                 <div class="accordion-header" onclick="toggleAccordion('accordion3', 'arrowClosed3', 'arrowDown')">
-                <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                <span>Contact</span>
+                    <img id="arrowClosed3" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                    <span>Contact</span>
+                </div>
+                <div class="accordion-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" id="email">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone number:</label>
+                            <input type="text" id="phoneNumber">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="linked">LinkedIn:</label>
+                            <input type="text" id="linkedin">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="website">Website:</label>
+                            <input type="text" id="website">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="github">Github:</label>
+                            <input type="text" id="githubProfile">
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="portfolio">Portfolio link:</label>
+                            <input type="text" id="portfolio">
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="accordion-content">
-                <form>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="text" id="email">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phoneNumber">Phone number:</label>
-                        <input type="text" id="phoneNumber">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="linked">LinkedIn:</label>
-                        <input type="text" id="linkedinProfile">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="website">Website:</label>
-                        <input type="text" id="website">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="github">Github:</label>
-                        <input type="text" id="githubProfile">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="portfolio">Portfolio link:</label>
-                        <input type="text" id="portfolio">
-                    </div>
-                </form>
-            </div>
-                
+    
             <!-- EDUCATION -->
             <div class="accordion" id="accordion4">
                 <div class="accordion-header" onclick="toggleAccordion('accordion4', 'arrowClosed4', 'arrowDown')">
-                <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                <span>Education</span>
+                    <img id="arrowClosed4" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                    <span>Education</span>
+                </div>
+                <div class="accordion-content">
+                    <div id="educationContainer"></div>
+                    <button class="add-education-btn" onclick="addEducation()">Add Education</button>
+                </div>
             </div>
-            <div class="accordion-content">
-                <div id="educationContainer"></div>
-                <button class="add-education-btn" onclick="addEducation()">Add Education</button>
-            </div>
-
+    
             <!-- EXPERIENCE -->
             <div class="accordion" id="accordion5">
                 <div class="accordion-header" onclick="toggleAccordion('accordion5', 'arrowClosed5', 'arrowDown')">
-                <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                <span>Experience</span>
+                    <img id="arrowClosed5" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                    <span>Experience</span>
+                </div>
+                <div class="accordion-content">
+                    <div id="experienceContainer"></div>
+                    <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
+                </div>
             </div>
-            <div class="accordion-content">
-                <div id="experienceContainer"></div>
-                <button class="add-experience-btn" type="button" onclick="addExperience()">Add Experience</button>
-            </div>
-            
+    
             <!-- LEGAL -->
             <div class="accordion" id="accordion6">
                 <div class="accordion-header" onclick="toggleAccordion('accordion6', 'arrowClosed6', 'arrowDown')">
-                <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
-                <span>Legal</span>
+                    <img id="arrowClosed6" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132" alt="Placeholder Image">
+                    <span>Legal</span>
+                </div>
+                <div class="accordion-content">
+                    <form>
+                        <div class="form-group">
+                            <label for="province">Gender:</label>
+                            <div class="select-wrapper">
+                                <select id="gender" name="gender">
+                                    <option value="" disabled selected>Select your gender</option>
+                                    <option value="female">Female</option>
+                                    <option value="male">Male</option>
+                                    <option value="other">Other</option>
+                                    <option value="doNotIdentify">I don't wish to answer</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="nonCompeteDisclosure">Have you signed a non-compete that will affect your employment for this firm?</label>
+                            <div class="radio-group">
+                                <label for="nonCompeteDisclosure">
+                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="yes"> Yes
+                                </label>
+                                <label for="nonCompeteDisclosure">
+                                    <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="veteran">Are you a protected veteran?</label>
+                            <div class="radio-group">
+                                <label for="veteran">
+                                    <input type="radio" id="veteran" name="veteran" value="yes"> Yes
+                                </label>
+                                <label for="veteran">
+                                    <input type="radio" id="veteran" name="veteran" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="authorizedToWork">Are you legally eligible to work where this job is located?</label>
+                            <div class="radio-group">
+                                <label for="authorizedToWork">
+                                    <input type="radio" id="authorizedToWork" name="legal" value="yes"> Yes
+                                </label>
+                                <label for="authorizedToWork">
+                                    <input type="radio" id="authorizedToWork" name="legal" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
+                            <div class="radio-group">
+                                <label for="sponsorship">
+                                    <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
+                                </label>
+                                <label for="sponsorship">
+                                    <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="disability">Are you a person with a disability?</label>
+                            <div class="radio-group">
+                                <label for="disability">
+                                    <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
+                                </label>
+                                <label for="disability">
+                                    <input type="radio" id="disability-no" name="disability" value="no"> No
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="accordion-content">
-                <form>
-                    <div class="form-group">
-                        <label for="province">Gender:</label>
-                        <div class="select-wrapper">
-                            <select id="gender" name="gender">
-                                <option value="" disabled selected>Select your gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                                <option value="other">Other</option>
-                                <option value="doNotIdentify">I don't wish to answer</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="nonCompeteDisclosure">Have you signed a non-compete that will affect your employment for this firm?</label>
-                        <div class="radio-group">
-                            <label for="nonCompeteDisclosure">
-                                <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="yes"> Yes
-                            </label>
-                            <label for="nonCompeteDisclosure">
-                                <input type="radio" id="nonCompeteDisclosure" name="nonCompeteDisclosure" value="no"> No
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="veteran">Are you a protected veteran?</label>
-                        <div class="radio-group">
-                            <label for="veteran">
-                                <input type="radio" id="veteran" name="veteran" value="yes"> Yes
-                            </label>
-                            <label for="veteran">
-                                <input type="radio" id="veteran" name="veteran" value="no"> No
-                            </label>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="authorizedToWork">Are you legally eligible to work where this job is located?</label>
-                        <div class="radio-group">
-                            <label for="authorizedToWork">
-                                <input type="radio" id="authorizedToWork" name="legal" value="yes"> Yes
-                            </label>
-                            <label for="authorizedToWork">
-                                <input type="radio" id="authorizedToWork" name="legal" value="no"> No
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="sponsorship">Will you, now or in the future, require sponsorship for your employment status?</label>
-                        <div class="radio-group">
-                            <label for="sponsorship">
-                                <input type="radio" id="sponsorship-yes" name="sponsorship" value="yes"> Yes
-                            </label>
-                            <label for="sponsorship">
-                                <input type="radio" id="sponsorship-no" name="sponsorship" value="no"> No
-                            </label>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label for="disability">Are you a person with a disability?</label>
-                        <div class="radio-group">
-                            <label for="disability">
-                                <input type="radio" id="disability-yes" name="disability" value="yes"> Yes
-                            </label>
-                            <label for="sponsorship">
-                                <input type="radio" id="disability-no" name="disability" value="no"> No
-                            </label>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <div class="buttonBlock">
+                <button class="button-19" role="button">Save  ✅</button>
             </div>
         </div>
-
-        <div class="buttonBlock">
-            <button class="button-19" role="button">Save</button>
+    </div>
+    
+    <!--Job Description URL-->
+    <label for="jobDescriptionURL">Enter the job description URL</label>
+    <div class="jobDescriptionTop">
+        <div id="jobWrapper">
+            <input 
+                type="text" 
+                id="jobProfile" 
+                placeholder="Job description url"
+                oninput="updateJobFeaturesState()" 
+            />
+            <span id="linkedinDisplay" onclick="editLinkedInText()" style="display: none;"></span>
         </div>
     </div>
 
     <div class="accordion" id="accordion7">
-        <div class="accordion-header" onclick="toggleAccordion('accordion7', 'arrowClosed7', 'arrowDown')">
-            <img id="arrowClosed7" src="https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&=&format=webp&quality=lossless&width=1132&height=1132">
-            <span>Generate coversheet</span>
+        <div class="accordion-header" onclick="toggleAccordion('accordion7', 'arrowClosed7', 'arrowClosed7')">
+            <img id="arrowClosed7" src="https://cdn.discordapp.com/attachments/1332823197543829606/1332979659754704937/caret-right-svgrepo-com.png?ex=6797398c&is=6795e80c&hm=38ed4517c73ab7f9889c7fd8445f01c4b127d7b17938138e95205edb42011eff&">
+            <span id="generateFeature" style="opacity: 0.5; cursor: not-allowed; color: #aca6a6;">
+                Generate cover letter + Track job with spreadsheet
+            </span>
+        </div>
+
+        <div class="accordion-content">
+            <div class="buttonBlock">
+                <button id="generateCoversheetBtn" class="button-19" onclick="generateCoversheet()" disabled>Generate cover sheet  📄</button>
             </div>
-        
+
+            <div class="form-group">
+                <label id="googleSheetLink-label" for="googleSheetLink">Link to Google Sheet</label>
+                <input type="text" id="googleSheetLink" placeholder="Enter Google Sheet link" oninput="enableGenerateButton()" />
+            </div>
+
+            <div class="buttonBlock">
+                <button id="addJobBtn" class="button-19" onclick="generateCoversheet()" disabled>Add job to spreadsheet  📊</button>
+            </div>
+        </div>
+
     </div>
 
 
 
     <script>
+        function enableGenerateButton() {
+            const googleSheetInput = document.getElementById("googleSheetLink").value.trim();
+            const generateButton = document.getElementById("addJobBtn");
+
+            if (googleSheetInput) {
+                generateButton.disabled = false;
+                generateButton.style.opacity = "1";
+                generateButton.style.cursor = "pointer";
+            } else {
+                generateButton.disabled = true;
+                generateButton.style.opacity = "0.5";
+                generateButton.style.cursor = "not-allowed";
+            }
+        }
+
+        function generateCoversheet() {
+            const googleSheetLink = document.getElementById("googleSheetLink").value.trim();
+            if (googleSheetLink) {
+                alert(`Generating coversheet using the Google Sheet link: ${googleSheetLink}`);
+                // Add your logic here for generating the coversheet.
+            } else {
+                alert("Please enter a valid Google Sheet link.");
+            }
+        }
+
+
+        function updateJobFeaturesState() {
+            const jobInput = document.getElementById("jobProfile").value.trim();
+            const generateFeatureSpan = document.getElementById("generateFeature");
+            const accordionHeader = document.getElementById("accordion7Header");
+            const arrowImage = document.getElementById("arrowClosed7");
+
+            if (jobInput) {
+                // Enable the accordion toggle
+                generateFeatureSpan.style.color = "#4E4138";
+                generateFeatureSpan.style.cursor = "pointer";
+                generateFeatureSpan.style.opacity = "1";
+
+                arrowImage.src =
+                    "https://cdn.discordapp.com/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&";
+
+                accordionHeader.classList.remove("disabled-state");
+                accordionHeader.classList.add("enabled-state");
+            } else {
+                // Disable the accordion toggle
+                generateFeatureSpan.style.color = "#ccc";
+                generateFeatureSpan.style.cursor = "not-allowed";
+                generateFeatureSpan.style.opacity = "0.5";
+
+                arrowImage.src =
+                    "https://cdn.discordapp.com/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png?ex=6796a7b9&is=67955639&hm=c7346d18c9b7a38b107b2ee288757c4aadef67454a6ebf5ea8d262587424a51a&";
+
+                accordionHeader.classList.add("disabled-state");
+                accordionHeader.classList.remove("enabled-state");
+            }
+        }
+
+        function toggleAccordion(accordionId, imageId1, imageId2) {
+            const accordion = document.getElementById(accordionId);
+            const content = accordion.querySelector(".accordion-content");
+            const image = document.getElementById(imageId1);
+            const accordionHeader = document.querySelector(`#${accordionId} .accordion-header`);
+
+            // Ensure toggling is allowed
+            if (accordionHeader.getAttribute("data-clickable") === "true") {
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                    image.src =
+                        "https://media.discordapp.net/attachments/1330221441677004876/1332823080367816819/caret-right-svgrepo-com.png";
+                } else {
+                    content.style.display = "block";
+                    image.src =
+                        "https://cdn.discordapp.com/attachments/1332823197543829606/1332979298050510921/caret-right-svgrepo-com_1.png?ex=67973936&is=6795e7b6&hm=1c22392071f8d347f7c4beb89e27f79cfab773b9235ba74383cf6f106b828b25&";
+                }
+            }
+        }
+
+
         let educationCount = 0;
 
         function addEducation() {
