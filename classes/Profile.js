@@ -143,7 +143,7 @@ function constructProfile(apiData) {
             work.location = locations[index] || "";
             work.startDate = formatDate(startDates[index] || "");
             work.endDate = formatDate(endDates[index] || "");
-            work.roleDescription = roleDescriptions[index] || "";
+            work.roleDescription = roleDescriptions[index] ||z "";
             profile.workExperience.push(work);
         });
     }

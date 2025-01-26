@@ -108,4 +108,16 @@ document.addEventListener("DOMContentLoaded", () => {
     //     });
     // });
   });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const autoFillBtn = document.getElementById('autoFillBtn');
+
+    if (autoFillBtn) {
+        autoFillBtn.addEventListener('click', () => {
+            loadProfilePromise();
+        });
+    } else {
+        console.warn('Auto-Fill button with ID "autoFillBtn" not found.');
+    }
+});
   
