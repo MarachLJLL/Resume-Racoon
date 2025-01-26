@@ -313,15 +313,19 @@ if (/.*wd3.*/.test(window.location.href)) {
 } else {
     fillText()
 }
+try {
+    setTimeout(() => {
+        let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]')
+        nextButton.addEventListener('click', () => {
+            setTimeout(() => {
+                fillText();
+            }, 5000);
+        });
+    }, delay)
+} catch (error) {
+    console.log(error)
+}
 
-setTimeout(() => {
-    let nextButton = document.querySelector('[data-automation-id="bottom-navigation-next-button"]')
-    nextButton.addEventListener('click', () => {
-        setTimeout(() => {
-            fillText();
-        }, 5000);
-    });
-}, delay)
 
 async function getProfile() {
     try {
