@@ -257,7 +257,7 @@ function addToSheets() {
     const googleSheetLink = document.getElementById("googleSheetLink")?.value.trim();
     const jobInput = document.getElementById("jobProfile")?.value.trim();
     const linkedin = document.getElementById("linkedin")?.value.trim();
-    alert(`Generating coversheet using the Google Sheet link: ${googleSheetLink} and ${jobInput} and ${linkedin}`);
+    // alert(`Generating coversheet using the Google Sheet link: ${googleSheetLink} and ${jobInput} and ${linkedin}`);
 
     const options = {
         method: 'POST',
@@ -268,7 +268,7 @@ function addToSheets() {
         body: JSON.stringify({
           "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
           "saved_item_id": "aFwE7UFbwv1fSbHreoDszM",
-          "pipeline_inputs": [{"input_name":"linkedinURL","value":linkedin},
+          "pipeline_inputs": [{"input_name":"linkedinURL","value":"https://www.linkedin.com/in/jason-shao-751686189/"},
             {"input_name":"googlesheetlink","value":googleSheetLink},
             {"input_name":"jobdescriptionurl","value":jobInput}]
         })
@@ -335,7 +335,7 @@ function generateCoverLetter() {
         body: JSON.stringify({
           "user_id": "JKN6WFfBqzVwBCNqMCQEkKDy6EA3",
           "saved_item_id": "8WBD2zQ5YtHCN9JtkxmFMZ",
-          "pipeline_inputs": [{"input_name":"LinkedInURL","value":linkedin},{"input_name":"jobdescriptionurl","value":jobInput}]
+          "pipeline_inputs": [{"input_name":"LinkedInURL","value":"https://www.linkedin.com/in/jason-shao-751686189/"},{"input_name":"jobdescriptionurl","value":jobInput}]
         })
      };
 
