@@ -124,12 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
    ************************************************/
   const generateCoversheetBtn = document.getElementById('generateCoversheetBtn');
   if (generateCoversheetBtn) {
-    generateCoversheetBtn.addEventListener('click', generateCoversheet);
+    generateCoversheetBtn.addEventListener('click', generateCoverLetter);
   }
 
   const addJobBtn = document.getElementById('addJobBtn');
   if (addJobBtn) {
-    addJobBtn.addEventListener('click', generateCoversheet);
+    addJobBtn.addEventListener('click', addToSheets);
   }
 
   const googleSheetLink = document.getElementById('googleSheetLink');
